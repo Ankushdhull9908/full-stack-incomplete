@@ -1,0 +1,21 @@
+.footer{
+    position: absolute;
+    top: 120%;
+    display: flex;
+    flex-direction: row;
+  
+    height: 7vh;
+    width: 100vw;
+   
+  }
+  
+  .insideFooter{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+    height: 100%;
+    width: 30%;
+    
+  }
+  

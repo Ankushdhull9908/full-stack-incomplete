@@ -1,0 +1,82 @@
+/* DescriptionOfItems.css */
+
+.container {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    justify-content: center; /* Center align items */
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .item-image {
+    border-radius: 5px;
+    max-width: 730px; /* Adjust max-width for image */
+    height: auto;
+    margin-right: 20px; /* Space between image and details */
+  }
+  
+  .item-details {
+    max-width: 400px; /* Limit width of details section */
+    text-align: left; /* Align text to the left */
+  }
+  
+  .item-title {
+    font-size: 1.5rem; /* Adjust title font size */
+    margin: 10px 0;
+  }
+  
+  .item-price {
+    font-size: 1.25rem; /* Adjust price font size */
+  }
+  
+  .item-description {
+    font-size: 1rem; /* Adjust description font size */
+    margin: 10px 0;
+  }
+  
+  .add-to-cart {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px; /* Adjust padding */
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Adjust margin */
+  }
+  
+  .add-to-cart:hover {
+    background-color: #0056b3; /* Darker shade for hover */
+  }
+  
+  .specifications {
+    margin-top: 15px; /* Adjust margin */
+  }
+  
+  .specifications-table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    width: 100%; /* Full width */
+    margin: 0 auto; /* Center table */
+    text-align: left;
+  }
+  
+  .specifications-table td {
+    border: 1px solid #ddd;
+    padding: 5px; /* Adjust padding */
+  }
+  
+  .specifications-table th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+  }
+  
+  .specifications-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .specifications-table tr:hover {
+    background-color: #e2e2e2;
+  }
+  
