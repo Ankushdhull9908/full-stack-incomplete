@@ -1,14 +1,18 @@
+
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import bcrypt from 'bcrypt'; // for hashing passwords
 import jwt from "jsonwebtoken";
 import { isTemplateLiteralTypeNode } from "typescript";
+import dotenv from 'dotenv';
+dotenv.config(); //
+
 
 const app = express();
 const port = 7600;
 
-const JWT_SECRET = 'ankush12';
+const JWT_SECRET = process.env.PORT || 7600
 
 
 app.use(express.json());
@@ -17,7 +21,7 @@ app.use(cors()); // Enable CORS
 // Database connection function
 const connectDB = async () => {
     try {
-        await mongoose.connect("mongodb+srv://ankushdhull9908:123456789ankush@cluster0.gf0hx.mongodb.net/?");
+        await mongoose.connect(process.env.MONGO_URI);
         console.log("Database connected successfully!");
     } catch (error) {
         console.error("Database connection failed:", error);
