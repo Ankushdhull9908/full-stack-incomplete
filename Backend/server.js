@@ -12,7 +12,7 @@ import { fileURLToPath } from 'url';
 
 
 const app = express();
-const port = 7600;
+const port = process.env.PORT || 7600;
 
 const JWT_SECRET = process.env.PORT || 7600
 
