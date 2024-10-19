@@ -1,103 +1,139 @@
-import React, { useState } from 'react';
-import items from './ItemList';
+import React, { useState, useEffect } from 'react';
 import './Content.css';
 import Hero1 from './Hero1.js';
 import { useNavigate } from 'react-router-dom';
 
-
-
 export default function Content(props) {
-  const navigate = useNavigate();
-  const [filterItems,setFilterItems] = useState(items)
-  
-  // Define the style based on the mode prop
-  const modeStyle = {
-    backgroundColor: props.mode === 'dark' ? 'white' : 'grey',
-  };
+    const [selectedCategory, setSelectedCategory] = useState(""); 
+    const navigate = useNavigate();
+    const [filterItems, setFilterItems] = useState([]);
+    const token = localStorage.getItem("userdata");
+    const username = token ? JSON.parse(token) : null;
 
+    const modeStyle = {
+        backgroundColor: props.mode === 'dark' ? 'white' : 'grey',
+    };
 
-  function AddToCart(index) {
-    const itemToAdd = items[index];
+    const fetchItems = async () => {
+        try {
+            const response = await fetch('http://localhost:7600/api/items'); 
+            if (!response.ok) throw new Error('Network response was not ok');
+            const data = await response.json();
+            console.log(data);
+            props.setAllItems(data); 
+            setFilterItems(data); 
+        } catch (error) {
+            console.error('Error fetching items:', error);
+        }
+    };
 
-    
-    const existingItem = props.cart.find((cartItem) => cartItem.id === itemToAdd.id);
+    useEffect(() => {
+        fetchItems(); 
+    }, []);
 
-    if (existingItem) {
-      
-      const updatedCart = props.cart.map((cartItem) =>
-        cartItem.id === itemToAdd.id
-          ? { ...cartItem, quantity: cartItem.quantity + 1 }
-          : cartItem
-      );
-      props.setCart(updatedCart);
-    } else {
-      // Item doesn't exist in the cart, add it with quantity: 1
-      props.setCart([...props.cart, { ...itemToAdd, quantity: 1 }]);
+    function AddToCart(index) {
+        if (!username) {
+            alert("please login first");
+            navigate("/form");
+        } else {
+            const itemData = {
+                itemId: filterItems[index].id,
+                itemUrl: filterItems[index].url,
+                itemDescription: filterItems[index].description,
+                itemName: filterItems[index].name,
+                itemQuantity: parseInt(filterItems[index].quantity),
+                itemPrice: filterItems[index].price,
+                itemOwnerEmail: username.user.name
+            };
+            console.log(itemData);
+
+            try {
+                const res = fetch("http://localhost:7600/api/addToCart", {
+                    method: "POST",  // Ensure the method is POST
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(itemData)
+                }); // Semicolon added here
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
     }
-  }
 
-  function phones(){
-    let phones = items.filter(i => i.category === "phone");
-   
+    function phones() {
+        setSelectedCategory("phone");
+        const filteredPhones = props.allItems.filter(i => i.category === "phone");
+        setFilterItems(filteredPhones);
+    }
 
-    setFilterItems(phones)
-  
-  }
+    function laptops() {
+        setSelectedCategory("laptop");
+        const filteredLaptops = props.allItems.filter(i => i.category === "laptop");
+        setFilterItems(filteredLaptops);
+    }
 
-  function laptops(){
-    var laptop = items.filter(i=> i.category === "laptop");
-   
+    function all() {
+        setSelectedCategory("all");
+        setFilterItems(props.allItems); 
+    }
 
-    setFilterItems(laptop)
-  
-  }
-   
-  function all(){
-    setFilterItems(items)
-  }
+    function television() {
+        setSelectedCategory("tv");
+        const filteredTVs = props.allItems.filter(i => i.category === "tv");
+        setFilterItems(filteredTVs);
+    }
 
-  function television(){
-    var tv = items.filter((i)=> i.category==="tv")
-    setFilterItems(tv)
-  }
-  
+    return (
+        <div className='main' style={modeStyle}>
+            <Hero1 />
+            <div className='Categories'>
+                <h1>Categories</h1>
+                
+                <img
+                    className={selectedCategory === "all" ? "active" : ""}
+                    src="/asus.jpeg"
+                    onClick={all}
+                    alt="All"
+                />
+                <img
+                    className={selectedCategory === "laptop" ? "active" : ""}
+                    src="/asus2.jpg"
+                    onClick={laptops}
+                    alt="Laptops"
+                />
+                <img
+                    className={selectedCategory === "phone" ? "active" : ""}
+                    src="/s24.jpg"
+                    onClick={phones}
+                    alt="Phones"
+                />
+                <img
+                    className={selectedCategory === "tv" ? "active" : ""}
+                    src="/qled.jpeg"
+                    onClick={television}
+                    alt="Television"
+                />
+            </div>
 
-  
-
-  
-
-  return (
-    <div className='main' style={modeStyle}>
-      <Hero1 style={modeStyle}/>
-      <div className='Categories'>
-        <h1>Categories</h1>
-        <img src="/asus.jpeg" onClick={()=>{
-          all()
-        }}  alt="error"/>
-        <img src="/asus2.jpg" onClick={()=>{
-          laptops()
-        }} alt="error" />
-        <img src="/s24.jpg" onClick={()=>{
-          phones()
-        }} alt="error" />
-        <img src="/qled.jpeg" onClick={()=>{
-          television()
-        }} alt="error" />
-      </div>
-       
-      <div className='MainContent' id="items" style={modeStyle}>
-     
-        {filterItems.map((item, index) => (
-          <div key={item.id} className='item' style={modeStyle}>
-            <img src={item.url} onClick={() => navigate(`/items/${item.id}`)} alt={item.id}/>
-            <h1 onClick={() => navigate(`/items/${item.id}`)} >{item.name}</h1>
-            <p><strong>Price:</strong> ₹{item.price}</p>
-            <p>{item.description}</p>
-            <button onClick={() => AddToCart(index)}>Add to Cart</button>
-            
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+            <div className='MainContent' id="items" style={modeStyle}>
+                {
+                    !filterItems.length > 0 ? <p>....Waiting for Network response</p> : filterItems.map((item, index) => (
+                        <div key={item.id} className='item' style={modeStyle}>
+                            <img
+                                src={item.url}
+                                onClick={() => navigate(`/items/${item.id}`)}
+                                alt={item.name}
+                            />
+                            <h1 onClick={() => navigate(`/items/${item.id}`)}>{item.name}</h1>
+                            <p><strong>Price:</strong> ₹{item.price}</p>
+                            <p>{item.description}</p>
+                            <button onClick={() => AddToCart(index)}>Add to Cart</button>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    );
 }

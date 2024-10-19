@@ -1,8 +1,8 @@
-let items = [
+/*let items = [
   { 
     id: 1, 
     name: "Dell G16", 
-    url: "/delllaptop.jpg",
+    url: "/dellnobg.png",
     Bigimage:"/delllaptop2.jpg",
     quantity: 0, 
     price: 50000, 
@@ -48,7 +48,7 @@ let items = [
   { 
     id: 3, 
     name: "Headphones", 
-    url: "/headphone.jpg", 
+    url: "/headphonenobg.png", 
     Bigimage:"/headphone2.jpg",
     quantity: 0, 
     category:"accessory,music",
@@ -67,7 +67,7 @@ let items = [
   { 
     id: 4, 
     name: "Smartwatch", 
-    url: "/smartwatch.png", 
+    url: "/smartwatchnobg.png", 
     Bigimage:"/smartwatch2.jpg",
     quantity: 0, 
     category:"accessory",
@@ -86,7 +86,7 @@ let items = [
   { 
     id: 5, 
     name: "Keyboard", 
-    url: "/keyboard.jpg", 
+    url: "/keyboardnobg.png", 
     Bigimage:"/keyboard2.jpg",
     category:"accessory",
     quantity: 0, 
@@ -513,29 +513,12 @@ let items = [
       dimensions: "44.5 x 14 x 44 cm",
       features: ["Wi-Fi Control", "Voice Assistant Support", "Adjustable Brightness"]
     }
-  },
-  {
-    id: 28,
-    name: "Airpod",
-    url: "/airpod.jpg",
-    Bigimage:"/airpod.jpg",
-    quantity: 0,
-    price: 15500,
-    description: "Apple Airpod Noise Cancellation With Comfort",
-    specifications: {
-      brand: "Apple",
-      model: "AirPods Pro 2",
-      type: "In-Ear",
-      batteryLife: "4.5 hours (single charge)",
-      weight: "56.4g (with case)",
-      noiseCancellation: "Active Noise Cancellation (ANC)",
-      features: ["Spatial Audio", "Sweat and Water Resistance", "Adaptive EQ"]
-    }
-  },
+  },*/
+/*
   {
     id: 29,
     name: "Asus Vivobook",
-    url: "/asus2.jpg",
+    url: "/asus.jpeg",
     Bigimage:"/asus.jpeg",
     quantity: 0,
     category:"laptop",
@@ -671,7 +654,52 @@ let items = [
       features: ["Ray Tracing", "4K Gaming", "Tempest 3D AudioTech", "Backwards Compatibility"]
     }
   }
-  
-];
+ 
+    
+];*/
 
-export default items;
+import { response } from "express";
+
+/*let product = {
+  id: 28,
+  name: "Airpod",
+  url: "/airpod.jpg",
+  Bigimage: "/airpod.jpg",
+  quantity: 0,
+  price: 15500,
+  description: "Apple Airpod Noise Cancellation With Comfort",
+  specifications: {
+    brand: "Apple",
+    model: "AirPods Pro 2",
+    type: "In-Ear",
+    batteryLife: "4.5 hours (single charge)",
+    weight: "56.4g (with case)",
+    noiseCancellation: "Active Noise Cancellation (ANC)",
+    features: ["Spatial Audio", "Sweat and Water Resistance", "Adaptive EQ"]
+  }
+};
+
+
+fetch("http://localhost:7600/addProduct", {
+  method: "POST",
+  headers: {
+      "Content-Type": "application/json",
+  },
+  body: JSON.stringify(product),
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error("Error:", error));*/
+
+
+  
+
+
+
+
+//export default product;
+
+
+
+
+

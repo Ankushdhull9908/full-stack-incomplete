@@ -86,6 +86,11 @@
      gap: 40px;
      justify-content: center;
 }
+.Categories h1{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
 
 .Categories img{
   cursor: pointer;
@@ -97,4 +102,36 @@
 
 .Categories img:hover{
   transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: grey;
+  }
+  .item {
+    cursor: pointer;
+    position: relative;
+   
+    width: 170px; /* Set a width for each item */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s;
+    overflow: hidden; /* Ensure images do not overflow */
+  }
+
+  .Categories h1{
+    display: none;
+  }
+  
 }

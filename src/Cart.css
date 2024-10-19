@@ -7,6 +7,7 @@
     align-items: center;
     gap: 20px;
     background-color: #f7f7f7;
+    margin: 0 auto;
 }
 
 .item2 {
@@ -87,4 +88,53 @@
 
 .item2 button:hover {
     background-color: #555;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .item2 {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%; /* Full width on smaller screens */
+    }
+
+    .item2 img {
+        width: 100px; /* Larger image for smaller screens */
+        height: 100px;
+        margin-bottom: 15px; /* Space below the image */
+    }
+
+    .item2 h1, .item2 p {
+        width: 100%; /* Full width for text elements */
+        text-align: left; /* Align text to the left */
+        margin-bottom: 10px; /* Space between title and description */
+    }
+
+    .item2 button {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .Cart {
+        padding: 15px;
+    }
+
+    .item2 img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .item2 h1 {
+        font-size: 16px;
+    }
+
+    .item2 p {
+        font-size: 12px;
+    }
+
+    #remove {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
 }

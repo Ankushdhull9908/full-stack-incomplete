@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './NavBar.css';
 
 export default function NavBar(props) {
+
+ 
   const navigate = useNavigate(); // React Router hook for navigation
+  const [isNavOpen, setIsNavOpen] = useState(false); // State for menu toggle
+
+  
+  const token = localStorage.getItem("userdata")
+    const userdata = JSON.parse(token)
+  
+  
+ 
+  
+  
+
+  function checkToken(){
+    
+   if(!token){
+    navigate("/form")
+   
+   }else{
+    navigate(`/dashboard/:${userdata.user.name}`)
+   }
+  }
 
   // Define styles based on the mode prop
   const mystyle = {
@@ -11,13 +33,11 @@ export default function NavBar(props) {
     color: props.mode === "dark" ? "black" : "white",
   };
 
-  
   function changeText(e) {
     var val = e.target.value;
     props.setText(val);
   }
 
-  // Function to handle search button click and navigate to the Search page
   function display() {
     navigate('/search', { state: { searchQuery: props.text } });
   }
@@ -28,7 +48,14 @@ export default function NavBar(props) {
         <div className='logo'>
           <p>{props.title}</p>
         </div>
-        <div className="inside-nav">
+
+        {/* Hamburger menu for mobile screens */}
+        <div className="hamburger" onClick={() => setIsNavOpen(!isNavOpen)}>
+          ☰ {/* Simple menu icon */}
+        </div>
+
+        {/* Links section */}
+        <div className={`inside-nav ${isNavOpen ? 'active' : ''}`}>
           <Link to="/" className="link" style={{ color: mystyle.color }}>
             <p>Home</p>
           </Link>
@@ -43,25 +70,33 @@ export default function NavBar(props) {
           </Link>
         </div>
 
-        {/* Input field to capture the text */}
+        {/* Search area */}
         <div className="search-area">
           <input
             type="text"
             id="search"
             placeholder="search"
-            value={props.text} // Bind the input value to state
-            onChange={changeText} // Call changeText when value changes
+            value={props.text}
+            onChange={changeText}
           />
           <button className='searchBtn' onClick={display}>Search</button>
         </div>
 
-        <Link to="/cart" className="link" style={{ color: mystyle.color }}>
-          <p>Cart</p>
-        </Link>
 
-        <div className="dark-light-mode">
-          <button className='darkbtn' onClick={props.toggle}>{props.value}</button>
+        {/* Cart link */}
+        <Link to="/cart" className="link" style={{ color: mystyle.color }}>
+        <div className='cart'>
+        <img src='/shopping.png' alt='shop' id='cartImg'/>
+          <p id="cartcount">{props.cartlength}</p>
+          </div>
+        </Link>
+        <div className='signupbtn'>
+        <button onClick={()=>{checkToken()}}>{props.signupbtn}</button>
         </div>
+        
+
+        {/* Mode toggle button */}
+        
       </div>
     </div>
   );
