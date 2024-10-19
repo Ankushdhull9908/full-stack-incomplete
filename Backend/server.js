@@ -6,13 +6,26 @@ import bcrypt from 'bcrypt'; // for hashing passwords
 import jwt from "jsonwebtoken";
 import { isTemplateLiteralTypeNode } from "typescript";
 import dotenv from 'dotenv';
+import path from 'path'
 dotenv.config(); //
+import { fileURLToPath } from 'url';
 
 
 const app = express();
 const port = 7600;
 
 const JWT_SECRET = process.env.PORT || 7600
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve the static files from the React app
+app.use(express.static(path.join(__dirname, '../Frontend/build')));
+
+// The "catchall" handler: for any request that doesn't match one above, send back index.html.
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../Frontend/build', 'index.html'));
+});
 
 
 app.use(express.json());
@@ -21,7 +34,7 @@ app.use(cors()); // Enable CORS
 // Database connection function
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI);
+        await mongoose.connect("mongodb+srv://ankushdhull9908:123456789ankush@cluster0.gf0hx.mongodb.net/FormSubmission");
         console.log("Database connected successfully!");
     } catch (error) {
         console.error("Database connection failed:", error);

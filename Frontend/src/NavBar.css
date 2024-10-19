@@ -1,0 +1,186 @@
+.navigation {
+  display: flex;
+  justify-content: space-between; /* Space between items */
+  align-items: center;
+  height: 60px; /* Adjusted height */
+  width: 97%;
+  background-color: black;
+  color: white;
+  padding: 10px 20px; /* Add some padding for better spacing */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for a subtle effect */
+}
+
+#cartcount{
+  position: absolute;
+  top: 0px;
+  right: 176px;
+  color: red;
+  font-weight: 700;
+  
+}
+.signupbtn button{
+  height: 35px;
+  width: 100px;
+  background-color: grey; /* Updated color */
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth hover effect */
+}
+.cart{
+  height: 50px;
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  
+  align-items: center;
+}
+
+.dark-light-mode img{
+  
+  height: 25px;
+  width: 25px;
+}
+
+#cartImg{
+  height: 35px;
+  width: 35px;
+}
+
+.inside-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%; /* Fill the height of the navigation bar */
+  width: 40%; /* Adjusted width for better spacing */
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.link:hover {
+  color: #50C878; /* Change color on hover */
+}
+
+/* Updated search area styling */
+.search-area {
+  display: flex;
+  align-items: center;
+  width: 40%; /* Set width */
+  justify-content: flex-end; /* Align to the right */
+}
+
+input {
+  height: 35px;
+  width: 250px;
+  border-radius: 20px; /* Rounded corners */
+  border: 1px solid #ddd; /* Subtle border */
+  outline: none;
+  padding: 0 15px; /* Inner padding */
+  margin-right: 10px; /* Spacing between input and button */
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #50C878; /* Highlight border on focus */
+}
+
+.searchBtn {
+  height: 35px;
+  width: 100px;
+  background-color: #50C878; /* Updated color */
+  border-radius: 20px;
+  border: 1px solid #50C878;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth hover effect */
+}
+
+.searchBtn:hover {
+  background-color: white; /* Invert colors */
+  color: #50C878; /* Change text color */
+  border: 1px solid #50C878; /* Invert border */
+}
+
+.logo p {
+  font-size: 22px;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  margin-left: 20px;
+}
+
+
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .navigation {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+  }
+
+  #cartImg{
+    position: absolute;
+    top: 30px;
+    right: 0px;
+    height: 35px;
+    width: 35px;
+  }
+
+  
+  
+
+  .inside-nav {
+    flex-direction: column;
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .search-area {
+    width: 100%;
+    justify-content: center; /* Center align in smaller screens */
+    margin: 10px 0;
+  }
+
+  input {
+    width: calc(100% - 120px); /* Adjusted width */
+    margin-bottom: 10px;
+  }
+
+  .searchBtn {
+    width: 120px; /* Adjust button width */
+  }
+}
+
+/* Hamburger menu styling */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+    margin-left: auto;
+    margin-right: 20px;
+  }
+
+  .inside-nav {
+    display: none; /* Initially hide navigation links */
+  }
+
+  .inside-nav.active {
+    display: flex; /* Show links when active */
+    flex-direction: column;
+    align-items: center;
+  }
+}

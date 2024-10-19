@@ -1,0 +1,15 @@
+.hero{
+    position: relative;
+    
+   
+    height: 92%;
+    width: 100%;
+    background-color: whitesmoke;
+}
+
+.hero video{
+    
+    height: 100%;
+    width: 100%;
+    
+}

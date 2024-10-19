@@ -1,0 +1,137 @@
+/* Main container for the items */
+.MainContent {
+  height: 100%;
+  width: 90%;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  gap: 20px;
+  padding: 20px;
+  background-color: grey;
+}
+
+.main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: grey;
+}
+
+.item {
+  cursor: pointer;
+  position: relative;
+  width: 200px; /* Set a width for each item */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s;
+  overflow: hidden; /* Ensure images do not overflow */
+}
+
+/* Image styling */
+.item img {
+  width: 100%; /* Make the image full width of the item */
+  height: 150px; /* Fixed height for uniformity */
+  object-fit: cover; /* Cover the area, maintaining aspect ratio */
+  border-radius: 4px; /* Slightly round the corners of the image */
+  margin-bottom: 10px; /* Space between image and text */
+}
+
+/* Item name */
+.item h1 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Item price */
+.item p {
+  margin: 8px 0;
+}
+
+/* Add to Cart button styling */
+.item button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for the button */
+.item button:hover {
+  background-color: #218838;
+}
+
+/* Hover effect for each item */
+.item:hover {
+  transform: translateY(-5px);
+}
+
+.Categories{
+     height: 100px;
+     width: 100%;
+     
+     display: flex;
+     align-items: center;
+     gap: 40px;
+     justify-content: center;
+}
+.Categories h1{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+.Categories img{
+  cursor: pointer;
+  height: 50px;
+  width:auto;
+  transition: 0.2s ease-in-out;
+  
+}
+
+.Categories img:hover{
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: grey;
+  }
+  .item {
+    cursor: pointer;
+    position: relative;
+   
+    width: 170px; /* Set a width for each item */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s;
+    overflow: hidden; /* Ensure images do not overflow */
+  }
+
+  .Categories h1{
+    display: none;
+  }
+  
+}
