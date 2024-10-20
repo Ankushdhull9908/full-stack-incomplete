@@ -16,7 +16,7 @@ export default function Content(props) {
 
     const fetchItems = async () => {
         try {
-            const response = await fetch('http://localhost:7600/api/items'); 
+            const response = await fetch('https://full-stack-incomplete-1.onrender.com/api/items'); 
             if (!response.ok) throw new Error('Network response was not ok');
             const data = await response.json();
             console.log(data);
@@ -48,7 +48,7 @@ export default function Content(props) {
             console.log(itemData);
 
             try {
-                const res = fetch("http://localhost:7600/api/addToCart", {
+                const res = fetch("https://full-stack-incomplete-1.onrender.com/api/addToCart", {
                     method: "POST",  // Ensure the method is POST
                     headers: {
                         'Content-Type': 'application/json'
