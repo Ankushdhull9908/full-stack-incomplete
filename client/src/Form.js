@@ -20,7 +20,7 @@ export default function Form(props) {
             password: pass 
         };
 
-        const url = formType==="SIGNUP"?"http://localhost:7600/signup" : "http://localhost:7600/login";
+        const url = formType==="SIGNUP"?"https://full-stack-incomplete-1.onrender.com/signup" : "https://full-stack-incomplete-1.onrender.com/login";
         
     
 
