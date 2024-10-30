@@ -8,8 +8,7 @@ export default function Content(props) {
     const [alldata,setAlldata] = useState([])
     const navigate = useNavigate();
     const [filterItems, setFilterItems] = useState([]);
-    const token = localStorage.getItem("userdata");
-    const username = token ? JSON.parse(token) : null;
+
 
     const modeStyle = {
         backgroundColor: props.mode === 'dark' ? 'white' : 'grey',
@@ -23,7 +22,7 @@ export default function Content(props) {
             console.log(data);
             setAlldata(data)
             props.setAllItems(data); 
-            setFilterItems(data); 
+            setFilterItems(data.slice(0,10)); 
         } catch (error) {
             console.error('Error fetching items:', error);
         }
@@ -33,47 +32,20 @@ export default function Content(props) {
         fetchItems(); 
     }, []);
 
-    function AddToCart(index) {
-        if (!username) {
-            alert("please login first");
-            navigate("/form");
-        } else {
-            const itemData = {
-                itemId: filterItems[index].id,
-                itemUrl: filterItems[index].url,
-                itemDescription: filterItems[index].description,
-                itemName: filterItems[index].name,
-                itemQuantity: parseInt(filterItems[index].quantity),
-                itemPrice: filterItems[index].price,
-                itemOwnerEmail: username.user.name
-            };
-            console.log(itemData);
-
-            try {
-                const res = fetch("https://full-stack-incomplete.onrender.com/api/addToCart", {
-                    method: "POST",  // Ensure the method is POST
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(itemData)
-                }); // Semicolon added here
-
-            } catch (error) {
-                console.log(error);
-            }
-        }
-    }
-
+    
     function phones() {
         setSelectedCategory("phone");
-        const filteredPhones = props.alldata.filter(i => i.category === "phone");
+        const filteredPhones = alldata.filter(i => i.category === "phone");
         setFilterItems(filteredPhones);
     }
 
     function laptops() {
+       
         setSelectedCategory("laptop");
-        const filteredLaptops = props.alldata.filter(i => i.category === "laptop");
+        console.log(alldata)
+        const filteredLaptops = alldata.filter(i => i.category === "laptop");
         setFilterItems(filteredLaptops);
+       
     }
 
     function all() {
@@ -83,7 +55,7 @@ export default function Content(props) {
 
     function television() {
         setSelectedCategory("tv");
-        const filteredTVs = props.alldata.filter(i => i.category === "tv");
+        const filteredTVs = alldata.filter(i => i.category === "tv");
         setFilterItems(filteredTVs);
     }
 
@@ -121,7 +93,7 @@ export default function Content(props) {
 
             <div className='MainContent' id="items" style={modeStyle}>
                 {
-                    !filterItems.length > 0 ? <p>Loading... Please wait a moment</p> : filterItems.map((item, index) => (
+                    filterItems.length === 0 ? <p>Loading... Please wait a moment</p> : filterItems.map((item, index) => (
                         <div key={item.id} className='item' style={modeStyle}>
                             <img
                                 src={item.url}
