@@ -56,7 +56,7 @@ export default function NavBar(props) {
 
         {/* Links section */}
         <div className={`inside-nav ${isNavOpen ? 'active' : ''}`}>
-          <Link to="/" className="link" style={{ color: mystyle.color }}>
+          <Link to="/api/items" className="link" style={{ color: mystyle.color }}>
             <p>Home</p>
           </Link>
           <Link to="/about" className="link" style={{ color: mystyle.color }}>
