@@ -81,7 +81,7 @@ function App() {
         <NavBar title="elecTRONic" Home="Home" mode={modestyle} toggle={toggleMode} value={btnValue}  text={text} setText={setText} signupbtn={signupbtn} setsignupbtn={setsignupbtn} cartlength={cartLength}/>
         <Routes>
           <Route path="/about" element={<About mode={modestyle}/>} />
-          <Route path="/" element={<Content mode={modestyle} cart={cart} setCart={setCart} text={text} allItems={allItems} setAllItems={setAllItems} />} />
+          <Route path="/api/items" element={<Content mode={modestyle} cart={cart} setCart={setCart} text={text} allItems={allItems} setAllItems={setAllItems} />} />
           <Route path="/contact" element={<QueryForm mode={modestyle} />} />
           <Route path="/news" element={<News mode={modestyle} />} />
           <Route path="/cart" element={<Cart mode={modestyle}  cart={cart} setCart={setCart} />} />
