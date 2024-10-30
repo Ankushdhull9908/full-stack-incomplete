@@ -131,7 +131,7 @@ export default function Content(props) {
                             <h1 onClick={() => navigate(`/items/${item.id}`)}>{item.name}</h1>
                             <p><strong>Price:</strong> ₹{item.price}</p>
                             <p>{item.description}</p>
-                            <button onClick={() => AddToCart(index)}>Add to Cart</button>
+                            
                         </div>
                     ))
                 }
