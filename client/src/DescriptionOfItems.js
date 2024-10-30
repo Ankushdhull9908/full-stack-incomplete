@@ -219,6 +219,7 @@ export default function DescriptionOfItems(props) {
 
   return (
     <div className="container" style={modeStyle}>
+      <div className='imagesection'>
       <div className='verticalimages'>
       {
           Object.entries(item.images).map(([key, value]) => (
@@ -236,6 +237,8 @@ export default function DescriptionOfItems(props) {
       <div className='bigproductimg'>
       <img src={imagestate} alt={item.name} />
       </div>
+      </div>
+      
      
       <div className="item-details">
         <h1 className="item-title">{item.name}</h1>
