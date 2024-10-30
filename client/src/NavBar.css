@@ -130,11 +130,36 @@ input:focus {
   .cart{
     
     position: absolute;
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     right:80px;
-    top: 15px;
+    top: 20px;
     
+  }
+
+  .signupbtn{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    top: 25px;
+    right: 110px;
+    border: 0.5px solid green;
+    border-radius: 10px;
+  }
+
+  .signupbtn img{
+    height: 25px;
+    width: 25px;
+  }
+
+  .signupbtn button{
+    height: 80%;
+    width: 60%;
+    border: none;
+    background:none;
+    color: black;
   }
 
   .cart img{
@@ -150,12 +175,14 @@ input:focus {
   .logo p {
     position: absolute;
     left: 5px;
-    top: 2px;
+    top: 10px;
+    font-size: 16px;
   }
   .navigation {
     flex-direction: column;
     height: auto;
     padding: 20px;
+
   }
 
   
