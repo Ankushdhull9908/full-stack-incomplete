@@ -104,7 +104,7 @@
   transform: scale(1.1);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 500px) {
   .main {
     position: relative;
     display: flex;
@@ -116,18 +116,10 @@
     background-color: grey;
   }
   .item {
-    cursor: pointer;
-    position: relative;
-   
-    width: 170px; /* Set a width for each item */
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.2s;
-    overflow: hidden; /* Ensure images do not overflow */
+    
+    margin-right: 4px;
+        height: 220px;
+        width: 150px;
   }
 
   .Categories h1{
