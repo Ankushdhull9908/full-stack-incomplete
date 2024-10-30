@@ -17,13 +17,19 @@ export default function DescriptionOfItems(props) {
   const { id } = useParams(); // Get ID from URL
   const numericId = Number(id); // Convert ID to number
   const [flaglike,setflaglike] = useState(false)
+  const [imagestate,setImageState] = useState()
+  const [productimgarr,setProductimgarr] = useState()
+
+  console.log(item)
 
   // Fetch the specific item by ID if it's not available in props.allItems
   useEffect(() => {
     if (props.allItems.length > 0) {
       // If items are already available in props, find the item
       const foundItem = props.allItems.find((item) => item.id === numericId);
+      
       setItem(foundItem);
+      setImageState(foundItem.url)
     } else {
       // If props.allItems is empty, fetch the specific item data
       const fetchItemById = async () => {
@@ -35,7 +41,8 @@ export default function DescriptionOfItems(props) {
           const itemData = await response.json();
           
           setItem(itemData);
-         
+          setImageState(itemData.url)
+          console.log(item.url)
         } catch (error) {
           console.error('Error fetching item:', error);
         }
@@ -44,6 +51,7 @@ export default function DescriptionOfItems(props) {
       fetchItemById();
     }
   }, [props.allItems, numericId]);
+ 
 
   // Fetch comments when the component is mounted or when `numericId` changes
   useEffect(() => {
@@ -89,18 +97,9 @@ export default function DescriptionOfItems(props) {
   const filteredComments = comments.filter((comment) => comment.itemId === numericId);
   console.log(filteredComments)
   
-  // Handle Add to Cart functionality
+ 
   const handleAddToCart = () => {
-   /* let copyOfCart = [...props.cart]; // Create a copy of the cart
-    let existingItemIndex = copyOfCart.findIndex((cartItem) => cartItem.id === item.id);
-
-    if (existingItemIndex !== -1) {
-      copyOfCart[existingItemIndex].quantity += 1; // Increase quantity
-      props.setCart(copyOfCart); // Update the cart state
-    } else {
-      const newItem = { ...item, quantity: 1 }; // Start quantity at 1
-      props.setCart([...copyOfCart, newItem]); // Add new item to cart
-    }*/
+   
       if (!username) {
         alert("please login first");
         navigate("/form");
@@ -123,7 +122,7 @@ export default function DescriptionOfItems(props) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(itemData)
-            }); // Semicolon added here
+            }); 
 
         } catch (error) {
             console.log(error);
@@ -176,7 +175,7 @@ export default function DescriptionOfItems(props) {
 
 
     try{
-      fetch('http://localhost:7600/deletecomment',{
+      fetch('https://full-stack-incomplete.onrender.com/deletecomment',{
         method:"Post",headers:{
           'Content-type':'Application/json'
         },body:JSON.stringify(deletecommentdata)
@@ -199,7 +198,7 @@ export default function DescriptionOfItems(props) {
         console.log(commentlikedata)
 
         try{
-           fetch('http://localhost:7600/givelike',
+           fetch('https://full-stack-incomplete.onrender.com/givelike',
             {
               method:"Post",headers:{
                 'Content-type':'Application/json'
@@ -212,9 +211,32 @@ export default function DescriptionOfItems(props) {
         }
   }
 
+
+    
+  
+  
+  
+
   return (
     <div className="container" style={modeStyle}>
-      <img src={item.Bigimage} alt={item.name} className="item-image" />
+      <div className='verticalimages'>
+      {
+          Object.entries(item.images).map(([key, value]) => (
+        <img 
+            key={key}
+            src={value} 
+            onMouseOver={(e) => {
+                console.log(setImageState(e.target.src)); 
+            }}/>
+           ))
+      }
+
+        
+      </div>
+      <div className='bigproductimg'>
+      <img src={imagestate} alt={item.name} />
+      </div>
+     
       <div className="item-details">
         <h1 className="item-title">{item.name}</h1>
         <p className="item-price"><strong>Price:</strong> ₹{item.price}</p>
