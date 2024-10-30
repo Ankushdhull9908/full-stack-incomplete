@@ -46,7 +46,9 @@ export default function NavBar(props) {
     <div>
       <div className="navigation" style={mystyle}>
         <div className='logo'>
+        <Link to ="/">
           <p>{props.title}</p>
+   </Link>
         </div>
 
         {/* Hamburger menu for mobile screens */}
