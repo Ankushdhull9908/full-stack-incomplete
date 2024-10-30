@@ -53,9 +53,7 @@ export default function Search(props) {
               <h3>{item.name}</h3>
               <p>{item.description}</p>
               <p>Price: ₹{item.price}</p>
-              <button onClick={()=>{
-                AddToCart(index)
-              }}>Add To Cart</button>
+              
             </div>
           ))}
         </div>
