@@ -12,7 +12,7 @@ export default function Cart(props) {
   useEffect(()=>{
       const displayCart = async ()=>{
             try{
-                 const response = await fetch("http://localhost:7600/displaycart")
+                 const response = await fetch("https://full-stack-incomplete.onrender.com/displaycart")
                  const data = await response.json();
                  
                    
