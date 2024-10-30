@@ -60,7 +60,9 @@ const ProductSchema = new mongoose.Schema({
       weight: { type: String, required: true },
       noiseCancellation: { type: String, required: true },
       features: { type: [String], required: false }
-    }
+    },
+  category: String,
+  images: [String]
   });
 
   const cartschema = new mongoose.Schema({
