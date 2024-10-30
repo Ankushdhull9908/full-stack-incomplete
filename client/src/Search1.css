@@ -65,4 +65,29 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   }
+
+
+  @media (max-width:480px) {
+    .item-card{
+    
+      margin-right: 5px;
+          height: 220px;
+          width: 120px;
+    }
+  
+    .item-card h3{
+      font-size: 13px;
+    }
+  
+    .item-card p{
+     font-size: 11px;
+    }
+  
+    .item-card img{
+       height:80px;
+      object-fit:cover;
+    }
+    
+    
+  }
   
