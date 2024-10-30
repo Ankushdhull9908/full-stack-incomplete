@@ -44,7 +44,7 @@ export default function Cart(props) {
     try{
       const minsQuantity = {itemId:props.cart[index].itemId,itemOwnerEmail:udata.user.name}
 
-      fetch('http://localhost:7600/minsCartQuantity',{
+      fetch('https://full-stack-incomplete.onrender.com/minsCartQuantity',{
        method:"Post",
        headers:{
          'Content-Type':'application/json'
@@ -69,7 +69,7 @@ export default function Cart(props) {
     try{
       const plusQuantity = {itemId:props.cart[index].itemId,itemOwnerEmail:udata.user.name}
 
-      fetch('http://localhost:7600/plusCartQuantity',{
+      fetch('https://full-stack-incomplete.onrender.com/plusCartQuantity',{
        method:"Post",
        headers:{
          'Content-Type':'application/json'
@@ -98,7 +98,7 @@ export default function Cart(props) {
     try{
        const datatodelete = {itemId:props.cart[index].itemId,itemOwnerEmail:udata.user.name}
 
-       fetch('http://localhost:7600/deletcartitem',{
+       fetch('https://full-stack-incomplete.onrender.com/deletcartitem',{
         method:"Post",
         headers:{
           'Content-Type':'application/json'
