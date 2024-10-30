@@ -10,3 +10,14 @@
     height: 100%;
     width: 100%;
   }
+
+@media (max-width:480px) {
+    .NewsContent{
+      height: 35vh;
+      width: 100vw;
+    }
+    
+    
+    
+    
+  }
