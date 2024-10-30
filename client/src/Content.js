@@ -121,7 +121,7 @@ export default function Content(props) {
 
             <div className='MainContent' id="items" style={modeStyle}>
                 {
-                    !filterItems.length > 0 ? <p>....Waiting for Network response</p> : filterItems.map((item, index) => (
+                    !filterItems.length > 0 ? <p>Loading... Please wait a moment</p> : filterItems.map((item, index) => (
                         <div key={item.id} className='item' style={modeStyle}>
                             <img
                                 src={item.url}
