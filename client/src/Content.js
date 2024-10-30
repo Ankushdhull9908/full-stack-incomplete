@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Content(props) {
     const [selectedCategory, setSelectedCategory] = useState(""); 
+    const [alldata,setAlldata] = useState([])
     const navigate = useNavigate();
     const [filterItems, setFilterItems] = useState([]);
     const token = localStorage.getItem("userdata");
@@ -20,6 +21,7 @@ export default function Content(props) {
             if (!response.ok) throw new Error('Network response was not ok');
             const data = await response.json();
             console.log(data);
+            setAlldata(data)
             props.setAllItems(data); 
             setFilterItems(data); 
         } catch (error) {
@@ -64,13 +66,13 @@ export default function Content(props) {
 
     function phones() {
         setSelectedCategory("phone");
-        const filteredPhones = props.allItems.filter(i => i.category === "phone");
+        const filteredPhones = props.alldata.filter(i => i.category === "phone");
         setFilterItems(filteredPhones);
     }
 
     function laptops() {
         setSelectedCategory("laptop");
-        const filteredLaptops = props.allItems.filter(i => i.category === "laptop");
+        const filteredLaptops = props.alldata.filter(i => i.category === "laptop");
         setFilterItems(filteredLaptops);
     }
 
@@ -81,7 +83,7 @@ export default function Content(props) {
 
     function television() {
         setSelectedCategory("tv");
-        const filteredTVs = props.allItems.filter(i => i.category === "tv");
+        const filteredTVs = props.alldata.filter(i => i.category === "tv");
         setFilterItems(filteredTVs);
     }
 
