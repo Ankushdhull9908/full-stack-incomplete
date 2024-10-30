@@ -22,7 +22,7 @@ export default function Content(props) {
             console.log(data);
             setAlldata(data)
             props.setAllItems(data); 
-            setFilterItems(data.slice(0,10)); 
+            setFilterItems(data); 
         } catch (error) {
             console.error('Error fetching items:', error);
         }
