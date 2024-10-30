@@ -46,9 +46,7 @@ export default function NavBar(props) {
     <div>
       <div className="navigation" style={mystyle}>
         <div className='logo'>
-        <Link to ="/">
-          <p>{props.title}</p>
-   </Link>
+         <Link to="/"> <p>{props.title}</p></Link>
         </div>
 
         {/* Hamburger menu for mobile screens */}
@@ -89,11 +87,12 @@ export default function NavBar(props) {
         <Link to="/cart" className="link" style={{ color: mystyle.color }}>
         <div className='cart'>
         <img src='/shopping.png' alt='shop' id='cartImg'/>
-       
+         
           </div>
         </Link>
         <div className='signupbtn'>
         <button onClick={()=>{checkToken()}}>{props.signupbtn}</button>
+        <img src='/user.png' alt='user'/>
         </div>
         
 
