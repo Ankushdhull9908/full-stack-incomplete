@@ -23,8 +23,8 @@ export default function Form(props) {
         };
 
         const url = formType === "SIGNUP"
-            ? "https://full-stack-incomplete-1.onrender.com/signup" 
-            : "https://full-stack-incomplete-1.onrender.com/login";
+            ? "https://full-stack-incomplete.onrender.com/signup" 
+            : "https://full-stack-incomplete.onrender.com/login";
 
         try {
             const response = await fetch(url, {
