@@ -104,22 +104,31 @@
   transform: scale(1.1);
 }
 
-@media (max-width: 500px) {
-  .main {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    background-color: grey;
-  }
+@media (max-width: 480px) {
+  
   .item {
     
     margin-right: 4px;
         height: 220px;
-        width: 150px;
+        width: 110px;
+  }
+
+  .item h1{
+    font-size: 14px;
+  }
+
+  .item p{
+   font-size: 12px;
+  }
+
+  .item img{
+     height:80px;
+    object-fit:cover;
+  }
+
+  .item button{
+    height: 25px;
+    width: 65px;
   }
 
   .Categories h1{
