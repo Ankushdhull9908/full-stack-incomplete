@@ -3,9 +3,10 @@
   justify-content: space-between; /* Space between items */
   align-items: center;
   height: 60px; /* Adjusted height */
-  width: 97%;
+  width: 90%;
   background-color: black;
   color: white;
+  margin: auto;
   padding: 10px 20px; /* Add some padding for better spacing */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for a subtle effect */
 }
@@ -126,7 +127,7 @@ input:focus {
     position: absolute;
     width: 35px;
     height: 35px;
-    right:50px;
+    right:80px;
     top: 15px;
     
   }
