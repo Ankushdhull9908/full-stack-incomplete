@@ -87,7 +87,7 @@ export default function NavBar(props) {
         <Link to="/cart" className="link" style={{ color: mystyle.color }}>
         <div className='cart'>
         <img src='/shopping.png' alt='shop' id='cartImg'/>
-          <p id="cartcount">{props.cartlength}</p>
+       
           </div>
         </Link>
         <div className='signupbtn'>
