@@ -15,9 +15,11 @@ const app = express();
 const port = process.env.PORT || 7600;
 
 const JWT_SECRET = process.env.PORT || 7600
+app.use(cors()); // Enable CORS
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, '../client/public')));
@@ -27,13 +29,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/public', 'index.html'));
 });
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/public', 'index.html'));
-});
 
 
 app.use(express.json());
-app.use(cors()); // Enable CORS
+
 
 // Database connection function
 const connectDB = async () => {
