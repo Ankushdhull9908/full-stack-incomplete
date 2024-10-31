@@ -91,7 +91,7 @@ export default function NavBar(props) {
           </div>
         </Link>
         <div className='signupbtn'>
-        <button onClick={()=>{checkToken()}}>{props.signupbtn}</button>
+        <button onClick={()=>{checkToken()}}>{props.signupbtn+` >`}</button>
         <img src='/user.png' alt='user'/>
         </div>
         
