@@ -24,20 +24,32 @@
   font-weight: 700;
   
 }
+.signupbtn{
+  border: 0.5px solid green;
+  border-radius: 10px;
+  display: flex;
+ 
+}
+.signupbtn img{
+  height: 30px;
+  width: 30px;
+}
 .signupbtn button{
-  height: 35px;
-  width: 100px;
+  height: 30px;
+  width: 80px;
   background-color: grey; /* Updated color */
   border-radius: 20px;
   border: 1px solid #ddd;
-  font-size: 14px;
-  color: white;
+  font-size: 12px;
+  border: none;
+  background:none;
+  color: black;
   cursor: pointer;
   transition: all 0.3s ease; /* Smooth hover effect */
 }
 .cart{
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   display: flex;
   justify-content: center;
 
@@ -145,8 +157,7 @@ input:focus {
     width: 120px;
     top: 25px;
     right: 110px;
-    border: 0.5px solid green;
-    border-radius: 10px;
+   
   }
 
   .signupbtn img{
@@ -157,9 +168,7 @@ input:focus {
   .signupbtn button{
     height: 80%;
     width: 60%;
-    border: none;
-    background:none;
-    color: black;
+    
   }
 
   .cart img{
