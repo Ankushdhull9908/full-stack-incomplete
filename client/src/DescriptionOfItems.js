@@ -110,7 +110,7 @@ export default function DescriptionOfItems(props) {
     if (numericId) {
       fetchComments(); 
     }
-  }, []);
+  }, [numericId]);
 
 
   /*useEffect(()=>{
