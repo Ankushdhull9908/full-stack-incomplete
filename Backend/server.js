@@ -15,11 +15,13 @@ const app = express();
 const port = process.env.PORT || 7600;
 
 const JWT_SECRET = process.env.PORT || 7600
-app.use(cors()); // Enable CORS
+
+app.use(cors({
+    origin: 'http://localhost:3000', // Allow requests from your frontend
+}));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, '../client/public')));
@@ -30,9 +32,8 @@ app.get('/', (req, res) => {
 });
 
 
-
 app.use(express.json());
-
+// Enable CORS
 
 // Database connection function
 const connectDB = async () => {
@@ -63,9 +64,7 @@ const ProductSchema = new mongoose.Schema({
       weight: { type: String, required: true },
       noiseCancellation: { type: String, required: true },
       features: { type: [String], required: false }
-    },
-  category: String,
-  images: [String]
+    }
   });
 
   const cartschema = new mongoose.Schema({
@@ -315,43 +314,59 @@ app.post('/deletecomment', async (req, res) => {
     }
 });
 
-
 const comment = new mongoose.Schema({
-        name:{
-            type:String,
-            required:true
-        },
-        itemId:{
-            type:Number,
-            required:true
-        },comment:{
-           type:String,
-           required:true
-        },numberoflikes:{
-            type:Number,
-            required:true
-        }
-})
-
-app.post('/givelike', async (req, res) => {
-    const { itemId, comment } = req.body;
-
-    try {
-        const found = await commentForm.findOne({ itemId: itemId, comment: comment });
-
-        if (found) {
-            found.numberoflikes += 1;  // Increment the like count
-            await found.save();  // Await the save operation to ensure it completes
-            console.log("Like increased");
-            return res.status(200).json({ message: "Like increased successfully", numberoflikes: found.numberoflikes });
-        } else {
-            return res.status(404).json({ message: "Comment not found" }); // Handle the case where the comment isn't found
-        }
-    } catch (error) {
-        console.error("Error giving like:", error); // Log the error for debugging
-        return res.status(500).json({ error: "Failed to give like" }); // Send a response indicating an error
+    name: {
+        type: String,
+        required: true
+    },
+    itemId: {
+        type: Number,
+        required: true
+    },
+    comment: {
+        type: String,
+        required: true
+    },
+    numberoflikes: {
+        type: Number,
+        required: true
+    },
+    likeby: {
+        type: [String],
+        required: false  // Changed to not required
     }
 });
+
+app.post('/givelike', async (req, res) => {
+    const { itemId, comment, likeby } = req.body;
+    
+
+    try {
+        const updatedComment = await commentForm.findOneAndUpdate(
+            { itemId: itemId, comment: comment },
+            { 
+                $inc: { numberoflikes: 1 }, // Increment number of likes
+                $addToSet: { likeby: likeby } // Add to the likeby array without duplicates
+            },
+            { new: true } // Return the updated document
+        );
+
+        if (updatedComment) {
+           
+            return res.status(200).json({ 
+                message: "Like increased successfully", 
+                numberoflikes: updatedComment.numberoflikes 
+            });
+        } else {
+            return res.status(404).json({ message: "Comment not found" });
+        }
+    } catch (error) {
+        console.error("Error giving like:", error);
+        return res.status(500).json({ error: "Failed to give like" });
+    }
+});
+
+
 
 
 const commentForm = mongoose.model("Comments",comment)
