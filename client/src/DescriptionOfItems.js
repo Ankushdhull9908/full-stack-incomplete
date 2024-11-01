@@ -214,7 +214,7 @@ useEffect(() => {
 
 
   function giveLike(index){
-        
+        setflaglike(true)
 
        const commentlikedata = {itemId : filteredComments[index].itemId,
         comment: filteredComments[index].comment,likeby:username.user.name}
@@ -229,7 +229,7 @@ useEffect(() => {
               body:JSON.stringify(commentlikedata)
             }
            )
-          setflaglike(true)
+          
           fetchComments(); 
         }catch(error){
           console.log(error)
@@ -313,7 +313,7 @@ useEffect(() => {
                      
                       ) : (
                      
-                     <button id="likebtn" onClick={()=>{giveLike(index)}}>Like</button>)
+                     <button id="likebtn" disabled={flaglike} onClick={()=>{giveLike(index)}}>Like</button>)
                }
                 <p id="nooflikes">{comment.numberoflikes}</p>
               </div>
