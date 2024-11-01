@@ -57,7 +57,7 @@ export default function DescriptionOfItems(props) {
  
 
   // Fetch comments when the component is mounted or when `numericId` changes
-  useEffect(() => {
+  
   const fetchComments = async () => {
     try {
       setIsLoading(true); // Start loading
@@ -99,9 +99,11 @@ export default function DescriptionOfItems(props) {
     }
   };
 
-  if (numericId) {
-    fetchComments();
-  }
+  
+
+
+useEffect(() => {
+    fetchComments()
 }, [numericId]);
 
 
