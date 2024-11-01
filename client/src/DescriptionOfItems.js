@@ -110,7 +110,7 @@ export default function DescriptionOfItems(props) {
     if (numericId) {
       fetchComments(); 
     }
-  }, [numericId]);
+  }, []);
 
 
   /*useEffect(()=>{
@@ -183,7 +183,7 @@ export default function DescriptionOfItems(props) {
 
       if (response.ok) {
         setNewComment(''); // Clear the comment input after successful submission
-        // fetchComments(); // Re-fetch the comments after adding a new one
+         fetchComments(); // Re-fetch the comments after adding a new one
       } else {
         throw new Error('Failed to post comment');
       }
@@ -210,6 +210,7 @@ export default function DescriptionOfItems(props) {
       })
 
       alert("comment deleted")
+      fetchComments(); 
       
     }catch(error){
 
@@ -235,6 +236,7 @@ export default function DescriptionOfItems(props) {
             }
            )
           setflaglike(true)
+          fetchComments(); 
         }catch(error){
           console.log(error)
         }
