@@ -16,9 +16,7 @@ const port = process.env.PORT || 7600;
 
 const JWT_SECRET = process.env.PORT || 7600
 
-app.use(cors({
-    origin: 'http://localhost:3000', // Allow requests from your frontend
-}));
+app.use(cors())
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
