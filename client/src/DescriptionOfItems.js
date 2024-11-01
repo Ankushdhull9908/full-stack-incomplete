@@ -9,7 +9,7 @@ export default function DescriptionOfItems(props) {
 
   const [comments, setComments] = useState([]); // State to store comments
   const [newComment, setNewComment] = useState(''); // State to store new comment
-  const [isLoading, setIsLoading] = useState(true); // State to manage loading
+  const [isLoading, setIsLoading] = useState(true); // State to manage loadingg
   const [item, setItem] = useState(null); // State to store the current item
   const navigate = useNavigate();
   const token = localStorage.getItem("userdata");
@@ -18,11 +18,14 @@ export default function DescriptionOfItems(props) {
   const numericId = Number(id); // Convert ID to number
   const [flaglike,setflaglike] = useState(false)
   const [imagestate,setImageState] = useState()
-  const [productimgarr,setProductimgarr] = useState()
+  
+  const [filteredComments,setfilteredcomments] = useState([])
+  const [hasliked,sethasliked] = useState([])
+  const [likedcomments,setlikedcomments] = useState('')
 
-  console.log(item)
 
-  // Fetch the specific item by ID if it's not available in props.allItems
+  
+
   useEffect(() => {
     if (props.allItems.length > 0) {
       // If items are already available in props, find the item
@@ -34,7 +37,7 @@ export default function DescriptionOfItems(props) {
       // If props.allItems is empty, fetch the specific item data
       const fetchItemById = async () => {
         try {
-          const response = await fetch(`https://full-stack-incomplete.onrender.com/api/items/${numericId}`);
+          const response = await fetch(`http://localhost:7600/api/items/${numericId}`);
           if (!response.ok) {
             throw new Error('Item not found');
           }
@@ -42,7 +45,7 @@ export default function DescriptionOfItems(props) {
           
           setItem(itemData);
           setImageState(itemData.url)
-          console.log(item.url)
+        
         } catch (error) {
           console.error('Error fetching item:', error);
         }
@@ -50,7 +53,7 @@ export default function DescriptionOfItems(props) {
 
       fetchItemById();
     }
-  }, [props.allItems, numericId]);
+  }, [props.allItems]);
  
 
   // Fetch comments when the component is mounted or when `numericId` changes
@@ -58,7 +61,7 @@ export default function DescriptionOfItems(props) {
     const fetchComments = async () => {
       try {
         setIsLoading(true); // Start loading
-        const response = await fetch("https://full-stack-incomplete.onrender.com/allcomments", {
+        const response = await fetch("http://localhost:7600/allcomments", {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',
@@ -69,33 +72,56 @@ export default function DescriptionOfItems(props) {
           throw new Error('Network response was not ok');
         }
 
-        const result = await response.json(); // Convert the response to JSON
+        const result = await response.json(); 
+        
 
-        // Check if the result is an array before setting it
+     
         if (Array.isArray(result)) {
-          setComments(result); // Set the comments state with the fetched data
+       
+          setComments(result);
+         // console.log(result[0].comment) 
+
+           const filtercom = result.filter((comment) => comment.itemId === numericId);
+
+            setfilteredcomments(filtercom)
+            const data = filtercom.filter((index)=> index.likeby.includes(username.user.name))
+            const likefilter = data.map((i)=> i.comment)
+            
+            sethasliked(data)
+            setlikedcomments(likefilter)
+            console.log(hasliked)
+            console.log(likedcomments)
+            
+            
+          
+          
         } else {
           console.error('Fetched comments data is not an array');
         }
       } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
       } finally {
-        setIsLoading(false); // Stop loading
+        setIsLoading(false); 
       }
     };
 
+    
+
     if (numericId) {
-      fetchComments(); // Call the async function to fetch comments
+      fetchComments(); 
     }
   }, [numericId]);
 
-  // Filter comments by item ID
 
-  useEffect(()=>{
-    
-  },[comments])
-  const filteredComments = comments.filter((comment) => comment.itemId === numericId);
-  console.log(filteredComments)
+  /*useEffect(()=>{
+
+           
+  },[])*/
+
+ 
+
+
+
   
  
   const handleAddToCart = () => {
@@ -116,7 +142,7 @@ export default function DescriptionOfItems(props) {
         console.log(itemData);
 
         try {
-            const res = fetch("https://full-stack-incomplete.onrender.com/api/addToCart", {
+               fetch("http://localhost:7600/api/addToCart", {
                 method: "POST",  // Ensure the method is POST
                 headers: {
                     'Content-Type': 'application/json'
@@ -129,6 +155,8 @@ export default function DescriptionOfItems(props) {
         }
     }
   };
+
+  
 
   // Handle comment form submission
   const handleSubmit = async (e) => {
@@ -145,7 +173,7 @@ export default function DescriptionOfItems(props) {
     console.log(commentData)
 
     try {
-      const response = await fetch("https://full-stack-incomplete.onrender.com/comment", {
+      const response = await fetch("http://localhost:7600/comment", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -175,7 +203,7 @@ export default function DescriptionOfItems(props) {
 
 
     try{
-      fetch('https://full-stack-incomplete.onrender.com/deletecomment',{
+      fetch('http://localhost:7600/deletecomment',{
         method:"Post",headers:{
           'Content-type':'Application/json'
         },body:JSON.stringify(deletecommentdata)
@@ -194,15 +222,16 @@ export default function DescriptionOfItems(props) {
         
 
        const commentlikedata = {itemId : filteredComments[index].itemId,
-        comment: filteredComments[index].comment}
-        console.log(commentlikedata)
+        comment: filteredComments[index].comment,likeby:username.user.name}
+        
 
         try{
-           fetch('https://full-stack-incomplete.onrender.com/givelike',
+           fetch('http://localhost:7600/givelike',
             {
               method:"Post",headers:{
                 'Content-type':'Application/json'
-              },body:JSON.stringify(commentlikedata)
+              },
+              body:JSON.stringify(commentlikedata)
             }
            )
           setflaglike(true)
@@ -211,11 +240,13 @@ export default function DescriptionOfItems(props) {
         }
   }
 
+  
+
 
     
   
   
-  
+ 
 
   return (
     <div className="container" style={modeStyle}>
@@ -223,11 +254,11 @@ export default function DescriptionOfItems(props) {
       <div className='verticalimages'>
       {
           Object.entries(item.images).map(([key, value]) => (
-        <img 
+        <img alt='error'
             key={key}
             src={value} 
             onMouseOver={(e) => {
-                console.log(setImageState(e.target.src)); 
+                setImageState(e.target.src)
             }}/>
            ))
       }
@@ -265,10 +296,10 @@ export default function DescriptionOfItems(props) {
         )}
       </div>
 
-      {/* Comment Section */}
+      
       <div className="comments-section">
         <h2>Reviews</h2>
-        {/* Display comments */}
+     
         <div className="comments-list">
           {filteredComments.length > 0 ? (
             filteredComments.map((comment, index) => (
@@ -280,14 +311,15 @@ export default function DescriptionOfItems(props) {
                     deletecomment(index)
                   }}>delete</button>:<p></p>
                 }
-                {
-                  comment.name === username.user.name?<p></p>:<button disabled={flaglike} onClick={()=>{
-                    giveLike(index)
-                  }}>Like</button>
-                }
+               {
+                     likedcomments.includes(comment.comment) ? (
+                     <span>Liked</span>
+                     
+                      ) : (
+                     
+                     <button id="likebtn" onClick={()=>{giveLike(index)}}>Like</button>)
+               }
                 <p id="nooflikes">{comment.numberoflikes}</p>
-                
-                
               </div>
             ))
           ) : (
@@ -308,13 +340,8 @@ export default function DescriptionOfItems(props) {
           }}
         >
           
-          <input
-            type="text"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            placeholder={`Comment as ${!username ? "user" : username.user.name}`}
-            required
-          />
+          <input type="text" value={newComment} onChange={(e) => setNewComment(e.target.value)} placeholder={`Comment as ${!username ? "user" : username.user.name}`}
+            required/>
           
           <button type="submit">Submit Comment</button>
         </form>
