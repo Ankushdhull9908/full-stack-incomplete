@@ -58,59 +58,51 @@ export default function DescriptionOfItems(props) {
 
   // Fetch comments when the component is mounted or when `numericId` changes
   useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        setIsLoading(true); // Start loading
-        const response = await fetch("https://full-stack-incomplete.onrender.com/allcomments", {
-          method: "GET",
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+  const fetchComments = async () => {
+    try {
+      setIsLoading(true); // Start loading
+      const response = await fetch("https://full-stack-incomplete.onrender.com/allcomments", {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
         }
+      });
 
-        const result = await response.json(); 
-        
-
-     
-        if (Array.isArray(result)) {
-       
-          setComments(result);
-         // console.log(result[0].comment) 
-
-           const filtercom = result.filter((comment) => comment.itemId === numericId);
-
-            setfilteredcomments(filtercom)
-            const data = filtercom.filter((index)=> index.likeby.includes(username.user.name))
-            const likefilter = data.map((i)=> i.comment)
-            
-            sethasliked(data)
-            setlikedcomments(likefilter)
-            console.log(hasliked)
-            console.log(likedcomments)
-            
-            
-          
-          
-        } else {
-          console.error('Fetched comments data is not an array');
-        }
-      } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-      } finally {
-        setIsLoading(false); 
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
-    };
 
-    
+      const result = await response.json(); 
+      
+      if (Array.isArray(result)) {
+        setComments(result);
 
-    if (numericId) {
-      fetchComments(); 
+        // Filter comments based on `itemId` and current user
+        const filtercom = result.filter((comment) => comment.itemId === numericId);
+        setfilteredcomments(filtercom);
+
+        const data = filtercom.filter((index) => index.likeby.includes(username.user.name));
+        const likefilter = data.map((i) => i.comment);
+        
+        sethasliked(data);
+        setlikedcomments(likefilter);
+        
+        console.log(hasliked);
+        console.log(likedcomments);
+      } else {
+        console.error('Fetched comments data is not an array');
+      }
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+    } finally {
+      setIsLoading(false); 
     }
-  }, [numericId]);
+  };
+
+  if (numericId) {
+    fetchComments();
+  }
+}, [numericId]);
 
 
   /*useEffect(()=>{
