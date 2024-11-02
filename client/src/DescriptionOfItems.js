@@ -38,12 +38,13 @@ export default function DescriptionOfItems(props) {
       
       setItem(foundItem);
       setImageState(foundItem.url)
+      console.log(item)
     } else {
       // If props.allItems is empty, fetch the specific item data
       const fetchItemById = async () => {
         try {
           setIsLoading(true)
-          const response = await fetch(`https://full-stack-incomplete.onrender.com/api/items/${numericId}`);
+          const response = await fetch(`http://localhost:7600/api/items/${numericId}`);
           if (!response.ok) {
             throw new Error('Item not found');
           }
@@ -68,7 +69,7 @@ export default function DescriptionOfItems(props) {
     if(username!=""){
       try {
       setIsLoading(true); // Start loading
-      const response = await fetch("https://full-stack-incomplete.onrender.com/allcomments", {
+      const response = await fetch("http://localhost:7600/allcomments", {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',
@@ -135,7 +136,7 @@ useEffect(() => {
         console.log(itemData);
 
         try {
-               fetch("https://full-stack-incomplete.onrender.com/api/addToCart", {
+               fetch("http://localhost:7600/api/addToCart", {
                 method: "POST",  // Ensure the method is POST
                 headers: {
                     'Content-Type': 'application/json'
@@ -167,9 +168,10 @@ useEffect(() => {
     };
 
     console.log(commentData)
+    console.log(item)
 
     try {
-      const response = await fetch("https://full-stack-incomplete.onrender.com/comment", {
+      const response = await fetch("http://localhost:7600/comment", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -225,7 +227,7 @@ useEffect(() => {
         
 
         try{
-           fetch('https://full-stack-incomplete.onrender.com/givelike',
+           fetch('http://localhost:7600/givelike',
             {
               method:"Post",headers:{
                 'Content-type':'Application/json'
@@ -268,8 +270,8 @@ useEffect(() => {
 
         
       </div>
-      <div className='bigproductimg'>
-      <img src={imagestate} alt={item.name} />
+      <div className='bigproductimg' >
+      <img src={imagestate} alt={item.name}  className={item.category==="mobile" || item.category==="fridge" || item.category==="washing machine"? "mobilefridgewashingmachine" : "laptopled"}/>
       </div>
       </div>
       
