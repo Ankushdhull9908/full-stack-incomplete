@@ -9,6 +9,7 @@ export default function DescriptionOfItems(props) {
 
   const [comments, setComments] = useState([]); // State to store comments
   const [newComment, setNewComment] = useState(''); // State to store new comment
+ 
   const [isLoading, setIsLoading] = useState(true); // State to manage loadingg
   const [item, setItem] = useState(null); // State to store the current item
   const navigate = useNavigate();
@@ -37,7 +38,8 @@ export default function DescriptionOfItems(props) {
       // If props.allItems is empty, fetch the specific item data
       const fetchItemById = async () => {
         try {
-          const response = await fetch(`https://full-stack-incomplete.onrender.com/api/items/${numericId}`);
+          setIsLoading(true)
+          const response = await fetch(`http://localhost:7600/api/items/${numericId}`);
           if (!response.ok) {
             throw new Error('Item not found');
           }
@@ -61,7 +63,7 @@ export default function DescriptionOfItems(props) {
   const fetchComments = async () => {
     try {
       setIsLoading(true); // Start loading
-      const response = await fetch("https://full-stack-incomplete.onrender.com/allcomments", {
+      const response = await fetch("http://localhost:7600/allcomments", {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',
@@ -73,16 +75,18 @@ export default function DescriptionOfItems(props) {
       }
 
       const result = await response.json(); 
-      
+      setflaglike(false)
       if (Array.isArray(result)) {
         setComments(result);
+        console.log(result)
 
         // Filter comments based on `itemId` and current user
         const filtercom = result.filter((comment) => comment.itemId === numericId);
         setfilteredcomments(filtercom);
-
+        // filter based on users
         const data = filtercom.filter((index) => index.likeby.includes(username.user.name));
-        const likefilter = data.map((i) => i.comment);
+        // filter based on comments
+        const likefilter = data.map((i) => i.commentId);
         
         sethasliked(data);
         setlikedcomments(likefilter);
@@ -136,7 +140,7 @@ useEffect(() => {
         console.log(itemData);
 
         try {
-               fetch("https://full-stack-incomplete.onrender.com/api/addToCart", {
+               fetch("http://localhost:7600/api/addToCart", {
                 method: "POST",  // Ensure the method is POST
                 headers: {
                     'Content-Type': 'application/json'
@@ -155,19 +159,22 @@ useEffect(() => {
   // Handle comment form submission
   const handleSubmit = async (e) => {
     const like = 0
+    
     e.preventDefault();
 
     const commentData = {
+      commentId: Math.floor(Math.random() * 10000),
       name: username.user.name,
-      itemId: numericId, // Use the numeric ID here
+      itemId: numericId, 
       comment: newComment,
-      numberoflikes:like
+      numberoflikes:like,
+
     };
 
     console.log(commentData)
 
     try {
-      const response = await fetch("https://full-stack-incomplete.onrender.com/comment", {
+      const response = await fetch("http://localhost:7600/comment", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -197,7 +204,7 @@ useEffect(() => {
 
 
     try{
-      fetch('https://full-stack-incomplete.onrender.com/deletecomment',{
+      fetch('http://localhost:7600/deletecomment',{
         method:"Post",headers:{
           'Content-type':'Application/json'
         },body:JSON.stringify(deletecommentdata)
@@ -214,14 +221,15 @@ useEffect(() => {
 
 
   function giveLike(index){
-        setflaglike(true)
-
+        
+    setflaglike(true)
        const commentlikedata = {itemId : filteredComments[index].itemId,
-        comment: filteredComments[index].comment,likeby:username.user.name}
+        commentId:filteredComments[index].commentId,
+        likeby:username.user.name}
         
 
         try{
-           fetch('https://full-stack-incomplete.onrender.com/givelike',
+           fetch('http://localhost:7600/givelike',
             {
               method:"Post",headers:{
                 'Content-type':'Application/json'
@@ -230,7 +238,9 @@ useEffect(() => {
             }
            )
           
+         
           fetchComments(); 
+          
         }catch(error){
           console.log(error)
         }
@@ -246,6 +256,7 @@ useEffect(() => {
 
   return (
     <div className="container" style={modeStyle}>
+      
       <div className='imagesection'>
       <div className='verticalimages'>
       {
@@ -297,31 +308,39 @@ useEffect(() => {
         <h2>Reviews</h2>
      
         <div className="comments-list">
-          {filteredComments.length > 0 ? (
-            filteredComments.map((comment, index) => (
-              <div key={index} className="comment">
-                <p><b>{comment.name}:</b> {comment.comment}</p>
-                <p id="viewson"><i>views on:</i> {item.name}</p>
-                {
-                  comment.name===username.user.name?<button id="deletebtn" onClick={()=>{
-                    deletecomment(index)
-                  }}>delete</button>:<p></p>
-                }
-               {
-                     likedcomments.includes(comment.comment) ? (
-                     <span>Liked</span>
-                     
-                      ) : (
-                     
-                     <button id="likebtn" disabled={flaglike} onClick={()=>{giveLike(index)}}>Like</button>)
-               }
-                <p id="nooflikes">{comment.numberoflikes}</p>
-              </div>
-            ))
-          ) : (
-            <p>No comments yet. Be The First One To Comment</p>
-          )}
-        </div>
+  {
+    isLoading ? (
+      <p>Loading</p>
+    ) : (
+      filteredComments.length > 0 ? (
+        filteredComments.map((comment, index) => (
+          <div key={index} className="comment">
+            <p><b>{comment.name}:</b> {comment.comment}</p>
+            <p id="viewson"><i>views on:</i> {item.name}</p>
+            {
+              comment.name === username.user.name ? (
+                <button id="deletebtn" onClick={() => deletecomment(index)}>delete</button>
+              ) : (
+                <p></p>
+              )
+            }
+            {
+              likedcomments.includes(comment.commentId) ? (
+                <span>Liked</span>
+              ) : (
+                <button id="likebtn" disabled={flaglike} onClick={() => giveLike(index)}>Like</button>
+              )
+            }
+            <p id="nooflikes">{comment.numberoflikes}</p>
+          </div>
+        ))
+      ) : (
+        <p>No comments yet. Be The First One To Comment</p>
+      )
+    )
+  }
+</div>
+
 
         {/* Comment Form */}
         <form
