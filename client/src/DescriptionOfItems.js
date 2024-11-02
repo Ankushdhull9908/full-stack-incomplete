@@ -44,7 +44,7 @@ export default function DescriptionOfItems(props) {
       const fetchItemById = async () => {
         try {
           setIsLoading(true)
-          const response = await fetch(`http://localhost:7600/api/items/${numericId}`);
+          const response = await fetch(`https://full-stack-incomplete.onrender.com/api/items/${numericId}`);
           if (!response.ok) {
             throw new Error('Item not found');
           }
@@ -69,7 +69,7 @@ export default function DescriptionOfItems(props) {
     if(username!=""){
       try {
       setIsLoading(true); // Start loading
-      const response = await fetch("http://localhost:7600/allcomments", {
+      const response = await fetch("https://full-stack-incomplete.onrender.com/allcomments", {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',
@@ -136,7 +136,7 @@ useEffect(() => {
         console.log(itemData);
 
         try {
-               fetch("http://localhost:7600/api/addToCart", {
+               fetch("https://full-stack-incomplete.onrender.com/api/addToCart", {
                 method: "POST",  // Ensure the method is POST
                 headers: {
                     'Content-Type': 'application/json'
@@ -171,7 +171,7 @@ useEffect(() => {
     console.log(item)
 
     try {
-      const response = await fetch("http://localhost:7600/comment", {
+      const response = await fetch("https://full-stack-incomplete.onrender.com/comment", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -202,7 +202,7 @@ useEffect(() => {
 
 
     try{
-      fetch('http://localhost:7600/deletecomment',{
+      fetch('https://full-stack-incomplete.onrender.com/deletecomment',{
         method:"Post",headers:{
           'Content-type':'Application/json'
         },body:JSON.stringify(deletecommentdata)
@@ -227,7 +227,7 @@ useEffect(() => {
         
 
         try{
-           fetch('http://localhost:7600/givelike',
+           fetch('https://full-stack-incomplete.onrender.com/givelike',
             {
               method:"Post",headers:{
                 'Content-type':'Application/json'
