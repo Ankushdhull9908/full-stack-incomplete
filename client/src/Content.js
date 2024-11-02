@@ -78,7 +78,7 @@ export default function Content(props) {
                     alt="Laptops"
                 />
                 <img
-                    className={selectedCategory === "phone" ? "active" : ""}
+                    className={selectedCategory === "mobile" ? "active" : ""}
                     src="/s24.jpg"
                     onClick={phones}
                     alt="Phones"
