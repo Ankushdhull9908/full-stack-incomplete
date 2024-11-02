@@ -317,20 +317,24 @@ useEffect(() => {
           <div key={index} className="comment">
             <p><b>{comment.name}:</b> {comment.comment}</p>
             <p id="viewson"><i>views on:</i> {item.name}</p>
+            <div className='likedelete'>
             {
               comment.name === username.user.name ? (
-                <button id="deletebtn" onClick={() => deletecomment(index)}>delete</button>
+               // <button id="deletebtn" onClick={() => deletecomment(index)}>delete</button>
+                <img id="dellogo" src="/bin.png" alt="bin" onClick={() => deletecomment(index)} />
               ) : (
                 <p></p>
               )
             }
             {
               likedcomments.includes(comment.commentId) ? (
-                <span>Liked</span>
+                <span><img id="likedlogo" src='/like (1).png'/></span>
               ) : (
-                <button id="likebtn" disabled={flaglike} onClick={() => giveLike(index)}>Like</button>
+                <img id="likelogo" src="/like.png" alt="Like" onClick={() => giveLike(index)} />
+     
               )
             }
+            </div>
             <p id="nooflikes">{comment.numberoflikes}</p>
           </div>
         ))
@@ -358,7 +362,8 @@ useEffect(() => {
           <input type="text" value={newComment} onChange={(e) => setNewComment(e.target.value)} placeholder={`Comment as ${!username ? "user" : username.user.name}`}
             required/>
           
-          <button type="submit">Submit Comment</button>
+          <button id="cmtbtn" type="submit">Submit Comment</button>
+          
         </form>
       </div>
     </div>
