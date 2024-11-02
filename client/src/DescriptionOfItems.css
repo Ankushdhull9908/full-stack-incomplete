@@ -1,390 +1,254 @@
-/* DescriptionOfItems.css */
-
+/* General Container */
 .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+  text-align: center;
   height: 100vh;
   width: 100%;
-    display: flex; /* Use flexbox for layout */
-    flex-wrap: wrap;
-    
-    justify-content: space-around; /* Center align items */
-    padding: 20px;
-    text-align: center;
-  }
-
-  .specifications {
-    
-    margin: auto;
-  }
-
-  .verticalimages{
-    
-    
-    border: 0.2px solid #ddd;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 60%;
-    width: auto;
-    
-  }
-
-  .verticalimages img{
-    margin-top: 15px;
-    height: 45px;
-    width: auto;
-  }
-
-  .verticalimages img:hover{
-    cursor: pointer;
-  }
-
-  .descriptionandspec{
-    height: 100%;
-    width: 100%;
-    background-color: #0056b3;
-    display: flex;
-    flex-direction:column;
-  }
-
-  .bigproductimg{
-    object-fit: cover;
-    border-radius: 5px;
-    width: 860px; /* Adjust max-width for image */
-    height: 500px;
-    margin-right: 20px; /* Space between image and details */
-  }
-  
-  .bigproductimg img{
-    
-    border-radius: 5px;
-    width: 90%;
-    height: 96%;
-    margin: 40px 20px; /* Space between image and details */
-  }
-
-  .comments-section {
-    width: 80%;
-    
-    padding: 20px;
-    
-    
-    margin-top: 30px;
-  }
-  
-  .comments-section h2 {
-    font-size: 1.8rem;
-    color: #333;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #e63946;
-    padding-bottom: 10px;
-  }
-
-
-.emoji-picker {
-  position: absolute;
-  z-index: 10; /* Ensure it’s above other elements */
-  margin-top: 8px; /* Space between emoji picker and form */
-  background-color: #007bff;
 }
-  
-  .comment-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-    border: none;
-  }
-  
-  .comment-form input {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    
-    
-    
-    font-size: 1rem;
-    
+
+/* Image Section */
+.imagesection {
+  display: flex;
+}
+
+.verticalimages {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: 0.2px solid #ddd;
+  height: 60%;
+  width: auto;
+}
+
+.verticalimages img {
+  margin-top: 15px;
+  height: 45px;
+  cursor: pointer;
+}
+
+.bigproductimg {
+  width: 860px;
+  height: 500px;
+  border-radius: 5px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.bigproductimg img {
+  width: 90%;
+  height: 96%;
+  border-radius: 5px;
+  margin: 40px 20px;
+}
+
+.mobilefridgewashingmachine {
+  max-height: 500px;
+  width: auto;
+}
+
+.laptopled {
+  height: 750px;
+  max-width: 700px;
+}
+
+/* Item Details */
+.item-details {
+  max-width: 400px;
+  text-align: left;
+}
+
+.item-title {
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+.item-price {
+  font-size: 1.25rem;
+}
+
+.item-description {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.add-to-cart {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.add-to-cart:hover {
+  background-color: #0056b3;
+}
+
+/* Specifications Section */
+.specifications {
+  margin: auto;
+  margin-top: 15px;
+}
+
+.specifications-table {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  text-align: left;
+  margin: 0 auto;
+}
+
+.specifications-table td,
+.specifications-table th {
+  padding: 5px;
+  border: 1px solid #ddd;
+}
+
+.specifications-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.specifications-table tr:hover {
+  background-color: #e2e2e2;
+}
+
+/* Comments Section */
+.comments-section {
+  width: 80%;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.comments-section h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #e63946;
+  padding-bottom: 10px;
+}
+
+/* Comment Form */
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.comment-form input {
+  width: 100%;
+  padding: 15px;
+  font-size: 1rem;
+  border: none;
+}
+
+.comment-form #cmtbtn {
+  align-self: flex-end;
+  background-color: #e63946;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#cmtbtn:hover {
+  background-color: darkred;
+}
+
+/* Comments List */
+.comments-list {
+  margin-top: 20px;
+}
+
+.comment {
+  background-color: #ffffff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 0.1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comment p {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+#viewson {
+  font-size: 12px;
+}
+
+/* Likes and Delete Icons */
+.likedelete {
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+  width: 40px;
+  position: absolute;
+  bottom: 5px;
+  right: 30px;
+}
+
+#likedlogo,
+#dellogo,
+#likelogo {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+#dellogo:hover,
+#likedlogo:hover,
+#likelogo:hover {
+  width: 20px;
+  height: 20px;
+}
+
+#nooflikes {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-size: 13px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .bigproductimg {
+    width: 380px;
+    height: 240px;
   }
 
-  #emojibtn {
-    background-color: #f1f1f1; /* Light background color */
-    border: none; /* Remove default border */
-    font-size: 1.5rem; /* Increase size of the emoji */
-    cursor: pointer; /* Pointer cursor on hover */
-    padding: 8px; /* Add some padding */
-    border-radius: 50%; /* Make it circular */
-    margin-left: 8px; /* Space between emoji and comment input */
-    transition: background-color 0.3s; /* Smooth hover effect */
+  .bigproductimg img {
+    width: 92%;
+    height: 75%;
   }
-  
-  .comment-form #cmtbtn {
-    align-self: flex-end;
-    background-color: #e63946;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 25px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+
+  .verticalimages img {
+    height: 25px;
   }
-  
-  #cmtbtn:hover {
-    background-color: darkred;
-  }
-  
-  .comments-list {
-    
-    margin-top: 20px;
-  }
-  
-  .comment {
-    position: relative;
+
+  .imagesection {
     display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: flex-start;
-    background-color: #ffffff;
-    padding: 15px;
-    gap:10px;
-    margin-bottom: 10px;
-    border: 0.1px solid #ddd;
-    
-  }
-  .emoji-picker {
-    position: absolute;
-    z-index: 1;
-  }
-  .comment-form {
-    display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 8px;
+    width: 90%;
   }
-  
-  
-  .comment p {
-    font-size: 1.1rem;
-    color: #333;
-    margin: 0;
-  }
-  
-  .comment .comment-name {
-    font-weight: bold;
-    color: #e63946;
-    margin-bottom: 5px;
-  }
-  
-  .comment .comment-text {
-    color: #555;
-  }
+}
 
-  #viewson{
-    font-size: 12px;
+@media (min-width: 1024px) {
+  .bigproductimg .mobilefridgewashingmachine {
+    max-height: 500px;
+    width: auto;
   }
-
-  #nooflikes{
-    position: absolute;
-    bottom: 8px;
-    right: 10px;
-    font-size: 13px;
-  }
-
-  .comment button{
-    position: absolute;
-    bottom: 5px;
-    right: 30px;
-  }
-
-  .imagesection{
-    display: flex;
-  }
-  #likedlogo,#dellogo{
-    height: 18px;
-    width: 18px;
-    cursor: pointer;
-  }
-
-  #likelogo{
-    height: 16px;
-    width: 16px;
-    cursor: pointer;
-  }
-
-  #dellogo:hover{
-    height: 20px;
-    width: 20px;
-  }
-
-  #likedlogo:hover{
-    height: 20px;
-    width: 20px;
-  }
-
-  #likelogo:hover{
-    height: 18px;
-    width: 18px;
-  }
-
-
-
-  .likedelete{
-    display: flex;
-    justify-content: space-between;
-    
-    height: auto;
-    width: 40px;
-    position: absolute;
-    bottom: 5px;
-    right: 30px;
-  }
-
-  
-
-
-  @media (max-width: 480px) {
-    .item-image {
-      border-radius: 5px;
-      max-width: 80%;
-      height: auto;
-      margin-right: 20px; 
-        
-    }
-
-    .imagesection{
-    
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 90%;
-
-      height: auto;
-    }
-    .verticalimages img{
-      margin-top: 15px;
-      height: 25px;
-      width: auto;
-    }
-
-    .bigproductimg{
-      object-fit: cover;
-      border-radius: 5px;
-      width: 380px; /* Adjust max-width for image */
-      height: 240px;
-      margin-right: 20px; /* Space between image and details */
-    }
-
-    .bigproductimg img{
-      height: 75%;
-      width: 92%;
-    }
-    
-    
-  }
-  
-  .item-details {
-    max-width: 400px; /* Limit width of details section */
-    text-align: left; /* Align text to the left */
-  }
-  
-  .item-title {
-    font-size: 1.5rem; /* Adjust title font size */
-    margin: 10px 0;
-  }
-  
-  .item-price {
-    font-size: 1.25rem; /* Adjust price font size */
-  }
-  
-  .item-description {
-    font-size: 1rem; /* Adjust description font size */
-    margin: 10px 0;
-  }
-  
-  .add-to-cart {
-    background-color: #007bff; /* Bootstrap primary color */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 16px; /* Adjust padding */
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px; /* Adjust margin */
-  }
-  
-  .add-to-cart:hover {
-    background-color: #0056b3; /* Darker shade for hover */
-  }
-  
-  .specifications {
-    margin-top: 15px; /* Adjust margin */
-  }
-  
-  .specifications-table {
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-    width: 100%; /* Full width */
-    margin: 0 auto; /* Center table */
-    text-align: left;
-  }
-  
-  .specifications-table td {
-    border: 1px solid #ddd;
-    padding: 5px; /* Adjust padding */
-  }
-  
-  .specifications-table th {
-    background-color: #f9f9f9;
-    font-weight: bold;
-  }
-  
-  .specifications-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  .specifications-table tr:hover {
-    background-color: #e2e2e2;
-  }
-
-  #likedlogo,#dellogo{
-    height: 18px;
-    width: 18px;
-    cursor: pointer;
-  }
-
-  #likelogo{
-    height: 16px;
-    width: 16px;
-    cursor: pointer;
-  }
-
-  #dellogo:hover{
-    height: 20px;
-    width: 20px;
-  }
-
-  #likedlogo:hover{
-    height: 20px;
-    width: 20px;
-  }
-
-  #likelogo:hover{
-    height: 18px;
-    width: 18px;
-  }
-
-
-
-  .likedelete{
-    display: flex;
-    justify-content: space-between;
-    
-    height: auto;
-    width: 40px;
-    position: absolute;
-    bottom: 5px;
-    right: 30px;
-  }
-
-  
+}
