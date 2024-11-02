@@ -2,19 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './DescriptionOfItems.css'; // Import the CSS file
 
+
 export default function DescriptionOfItems(props) {
   const modeStyle = {
     backgroundColor: props.mode === 'dark' ? 'white' : 'grey',
   };
 
   const [comments, setComments] = useState([]); // State to store comments
+
   const [newComment, setNewComment] = useState(''); // State to store new comment
- 
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // State to manage loadingg
   const [item, setItem] = useState(null); // State to store the current item
   const navigate = useNavigate();
   const token = localStorage.getItem("userdata");
-  const username = token ? JSON.parse(token) : null;
+ 
+  
+  const username = token ? JSON.parse(token) : "";
   const { id } = useParams(); // Get ID from URL
   const numericId = Number(id); // Convert ID to number
   const [flaglike,setflaglike] = useState(false)
@@ -39,7 +43,7 @@ export default function DescriptionOfItems(props) {
       const fetchItemById = async () => {
         try {
           setIsLoading(true)
-          const response = await fetch(`https://full-stack-incomplete.onrender.com/api/items/${numericId}`);
+          const response = await fetch(`http://localhost:7600/api/items/${numericId}`);
           if (!response.ok) {
             throw new Error('Item not found');
           }
@@ -61,9 +65,10 @@ export default function DescriptionOfItems(props) {
   // Fetch comments when the component is mounted or when `numericId` changes
   
   const fetchComments = async () => {
-    try {
+    if(username!=""){
+      try {
       setIsLoading(true); // Start loading
-      const response = await fetch("https://full-stack-incomplete.onrender.com/allcomments", {
+      const response = await fetch("http://localhost:7600/allcomments", {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',
@@ -101,9 +106,10 @@ export default function DescriptionOfItems(props) {
     } finally {
       setIsLoading(false); 
     }
-  };
 
-  
+    }
+    
+  };
 
 
 useEffect(() => {
@@ -111,17 +117,6 @@ useEffect(() => {
 }, [numericId]);
 
 
-  /*useEffect(()=>{
-
-           
-  },[])*/
-
- 
-
-
-
-  
- 
   const handleAddToCart = () => {
    
       if (!username) {
@@ -140,7 +135,7 @@ useEffect(() => {
         console.log(itemData);
 
         try {
-               fetch("https://full-stack-incomplete.onrender.com/api/addToCart", {
+               fetch("http://localhost:7600/api/addToCart", {
                 method: "POST",  // Ensure the method is POST
                 headers: {
                     'Content-Type': 'application/json'
@@ -174,7 +169,7 @@ useEffect(() => {
     console.log(commentData)
 
     try {
-      const response = await fetch("https://full-stack-incomplete.onrender.com/comment", {
+      const response = await fetch("http://localhost:7600/comment", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -184,6 +179,7 @@ useEffect(() => {
 
       if (response.ok) {
         setNewComment(''); // Clear the comment input after successful submission
+        setShowEmojiPicker(false);
          fetchComments(); // Re-fetch the comments after adding a new one
       } else {
         throw new Error('Failed to post comment');
@@ -204,7 +200,7 @@ useEffect(() => {
 
 
     try{
-      fetch('https://full-stack-incomplete.onrender.com/deletecomment',{
+      fetch('http://localhost:7600/deletecomment',{
         method:"Post",headers:{
           'Content-type':'Application/json'
         },body:JSON.stringify(deletecommentdata)
@@ -229,7 +225,7 @@ useEffect(() => {
         
 
         try{
-           fetch('https://full-stack-incomplete.onrender.com/givelike',
+           fetch('http://localhost:7600/givelike',
             {
               method:"Post",headers:{
                 'Content-type':'Application/json'
@@ -328,7 +324,7 @@ useEffect(() => {
             }
             {
               likedcomments.includes(comment.commentId) ? (
-                <span><img id="likedlogo" src='/like (1).png'/></span>
+                <span><img id="likedlogo" src='/like (1).png' alt="bin"/></span>
               ) : (
                 <img id="likelogo" src="/like.png" alt="Like" onClick={() => giveLike(index)} />
      
