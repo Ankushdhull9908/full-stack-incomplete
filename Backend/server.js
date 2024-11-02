@@ -9,6 +9,7 @@ import dotenv from 'dotenv';
 import path from 'path'
 dotenv.config(); //
 import { fileURLToPath } from 'url';
+import { type } from "os";
 
 
 const app = express();
@@ -16,7 +17,9 @@ const port = process.env.PORT || 7600;
 
 const JWT_SECRET = process.env.PORT || 7600
 
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:3000', // Allow requests from your frontend
+}));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -313,6 +316,10 @@ app.post('/deletecomment', async (req, res) => {
 });
 
 const comment = new mongoose.Schema({
+    commentId:{
+       type:Number,
+       required:true
+    },
     name: {
         type: String,
         required: true
@@ -336,12 +343,12 @@ const comment = new mongoose.Schema({
 });
 
 app.post('/givelike', async (req, res) => {
-    const { itemId, comment, likeby } = req.body;
+    const { itemId, commentId,likeby } = req.body;
     
 
     try {
         const updatedComment = await commentForm.findOneAndUpdate(
-            { itemId: itemId, comment: comment },
+            { itemId: itemId, commentId: commentId },
             { 
                 $inc: { numberoflikes: 1 }, // Increment number of likes
                 $addToSet: { likeby: likeby } // Add to the likeby array without duplicates
@@ -399,12 +406,12 @@ app.get("/allcomments", async (req, res) => {
 
 
 app.post('/comment',(req,res)=>{
-      const {name,itemId,comment,numberoflikes} = req.body;
+      const {commentId,name,itemId,comment,numberoflikes} = req.body;
 
 
       try{
 
-        const data= new commentForm({name,itemId,comment,numberoflikes})
+        const data= new commentForm({commentId,name,itemId,comment,numberoflikes})
         data.save()
         res.status(201).json({ message: 'Comment added' });
       }catch(error){
