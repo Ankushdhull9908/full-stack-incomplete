@@ -26,6 +26,10 @@
   overflow-y: scroll;
 }
 
+.relateditemcategory::-webkit-scrollbar {
+  display: none; /* Hides scrollbar */
+}
+
 .relateditemcategory .item{
   margin-left: 15px;
   flex-shrink: 0;
