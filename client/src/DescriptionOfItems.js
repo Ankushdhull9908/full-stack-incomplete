@@ -140,7 +140,7 @@ export default function DescriptionOfItems(props) {
 
 useEffect(() => {
     fetchComments()
-}, []);
+}, [numericId]);
 
 
   const handleAddToCart = () => {
