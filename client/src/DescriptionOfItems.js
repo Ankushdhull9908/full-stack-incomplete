@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './DescriptionOfItems.css'; // Import the CSS file
-
+import Footer from './Footer';
 
 export default function DescriptionOfItems(props) {
   const modeStyle = {
@@ -398,6 +398,7 @@ useEffect(() => {
           
         </form>
       </div>
+      <Footer/>
     </div>
   );
 }
