@@ -75,7 +75,7 @@ function App() {
 
 
   return (
-    <>
+    
       <div className='firstParent'>
       <BrowserRouter>
         <NavBar title="elecTRONic" Home="Home" mode={modestyle} toggle={toggleMode} value={btnValue}  text={text} setText={setText} signupbtn={signupbtn} setsignupbtn={setsignupbtn} cartlength={cartLength}/>
@@ -96,7 +96,7 @@ function App() {
       </BrowserRouter>
       
       </div>
-    </>
+    
   );
 }
 
