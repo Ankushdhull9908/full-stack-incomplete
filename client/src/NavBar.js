@@ -43,7 +43,7 @@ export default function NavBar(props) {
   }
 
   return (
-    <div>
+    
       <div className="navigation" style={mystyle}>
         <div className='logo'>
          <Link to="/"> <p>{props.title}</p></Link>
@@ -99,6 +99,6 @@ export default function NavBar(props) {
         {/* Mode toggle button */}
         
       </div>
-    </div>
+    
   );
 }
