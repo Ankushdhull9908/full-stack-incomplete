@@ -8,14 +8,14 @@ export default function Footer(props) {
 
   
   return (
-    <div className='main'>
-    <div className='footer' style={mystle}>
+    
+    <div className='footer'>
       <div className="insideFooter">
         <p>Follow us</p>
         <p>{props.about}</p>
         <p>CopyRight © Ankush Dhull</p>
       </div>
     </div>
-    </div>
+
   )
 }
