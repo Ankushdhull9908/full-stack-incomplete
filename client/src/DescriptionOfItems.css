@@ -277,3 +277,31 @@
     width: auto;
   }
 }
+@media (max-width: 390px) {
+  
+  .item {
+    
+    margin-right: 5px;
+        height: 200px;
+        width: 100px;
+  }
+
+  .item h1{
+    font-size: 13px;
+  }
+
+  .item p{
+   font-size: 10px;
+  }
+
+  .item img{
+     height:80px;
+    object-fit:cover;
+  }
+
+ 
+  .Categories h1{
+    display: none;
+  }
+  
+}
