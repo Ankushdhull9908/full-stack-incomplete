@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Content from './Content.js';
 //import Footer from './Footer.js';
@@ -26,8 +26,10 @@ import QueryForm from './QueryForm.js';
 
 
 
+
+
 function App() {
-  const [cartCount,setCartCount] = useState(0)
+ 
   const [allItems, setAllItems] = useState([]); 
   const [modestyle, newmodestyle] = useState("dark");
   const [btnValue, setBtnValue] = useState("Dark Mode");
@@ -91,8 +93,9 @@ function App() {
           <Route path='/dashboard/:id' element={<UserDashboard  setsignupbtn={setsignupbtn}/>}/>
           
         </Routes>
+       
         
-         {/*<Footer about="About Me" mode={modestyle} />*/}
+         
       </BrowserRouter>
       
       </div>
