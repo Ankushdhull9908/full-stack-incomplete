@@ -1,5 +1,7 @@
 /* General Container */
 .container {
+  position: relative;
+  top: 80px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -255,6 +257,10 @@
 
 /* Responsive Design */
 @media (max-width: 480px) {
+
+  .container{
+    top: 200px;
+  }
   .bigproductimg{
     min-width: 300px;
     display: flex;
