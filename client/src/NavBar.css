@@ -3,17 +3,23 @@
   justify-content: space-between; /* Space between items */
   align-items: center;
   height: 60px; /* Adjusted height */
-  width: 90%;
+  width: auto;
   background-color: black;
   color: white;
   margin: auto;
   padding: 10px 20px; /* Add some padding for better spacing */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for a subtle effect */
+  
 }
 
 .logo a{
   text-decoration: none;
   color: black;
+}
+
+.logo img{
+  height: 65px;
+  width: auto;
 }
 
 #cartcount{
@@ -138,7 +144,7 @@ input:focus {
 
 
 /* Responsive design for smaller screens */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .cart{
     
     position: absolute;
@@ -228,7 +234,7 @@ input:focus {
   font-size: 24px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .hamburger {
     display: block;
     margin-left: auto;
