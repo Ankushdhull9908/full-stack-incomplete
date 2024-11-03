@@ -7,9 +7,9 @@ export default function DescriptionOfItems(props) {
   const modeStyle = {
     backgroundColor: props.mode === 'dark' ? 'white' : 'grey',
   };
-
+  const [category,setCategory] = useState("")
   const [comments, setComments] = useState([]); // State to store comments
-
+  const [categoryitem1,setCategoryitems] =useState([])
   const [newComment, setNewComment] = useState(''); // State to store new comment
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // State to manage loadingg
@@ -37,39 +37,62 @@ export default function DescriptionOfItems(props) {
       const foundItem = props.allItems.find((item) => item.id === numericId);
       
       setItem(foundItem);
-      setImageState(foundItem.url)
-      console.log(item)
+      setImageState(foundItem.url);
+      setCategory(foundItem.category);
     } else {
       // If props.allItems is empty, fetch the specific item data
       const fetchItemById = async () => {
         try {
-          setIsLoading(true)
-          const response = await fetch(`https://full-stack-incomplete.onrender.com/api/items/${numericId}`);
+          setIsLoading(true);
+          const response = await fetch(`http://localhost:7600/api/items/${numericId}`);
           if (!response.ok) {
             throw new Error('Item not found');
           }
           const itemData = await response.json();
-          
           setItem(itemData);
-          setImageState(itemData.url)
-        
+          setCategory(itemData.category);
+          setImageState(itemData.url);
         } catch (error) {
           console.error('Error fetching item:', error);
+        } finally {
+          setIsLoading(false); // Stop loading after fetch completes
         }
       };
-
+  
       fetchItemById();
     }
-  }, [props.allItems]);
+  }, [numericId, props.allItems]);
+  
+  // Fetch items in the same category
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await fetch('http://localhost:7600/api/items'); 
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        const categoryItems = data.filter(item => item.category === category);
+        setCategoryitems(categoryItems);
+      } catch (error) {
+        console.error('Error fetching items:', error);
+      }
+    };
+  
+    if (category) { // Fetch only if category is set
+      fetchItems();
+    }
+  }, [category]); // Run this effect only when category changes
+  
+
+  
  
 
   // Fetch comments when the component is mounted or when `numericId` changes
   
   const fetchComments = async () => {
-    if(username!=""){
+    if(username!==""){
       try {
       setIsLoading(true); // Start loading
-      const response = await fetch("https://full-stack-incomplete.onrender.com/allcomments", {
+      const response = await fetch("http://localhost:7600/allcomments", {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',
@@ -113,9 +136,11 @@ export default function DescriptionOfItems(props) {
   };
 
 
+
+
 useEffect(() => {
     fetchComments()
-}, [numericId]);
+}, []);
 
 
   const handleAddToCart = () => {
@@ -136,7 +161,7 @@ useEffect(() => {
         console.log(itemData);
 
         try {
-               fetch("https://full-stack-incomplete.onrender.com/api/addToCart", {
+               fetch("http://localhost:7600/api/addToCart", {
                 method: "POST",  // Ensure the method is POST
                 headers: {
                     'Content-Type': 'application/json'
@@ -171,7 +196,7 @@ useEffect(() => {
     console.log(item)
 
     try {
-      const response = await fetch("https://full-stack-incomplete.onrender.com/comment", {
+      const response = await fetch("http://localhost:7600/comment", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -202,7 +227,7 @@ useEffect(() => {
 
 
     try{
-      fetch('https://full-stack-incomplete.onrender.com/deletecomment',{
+      fetch('http://localhost:7600/deletecomment',{
         method:"Post",headers:{
           'Content-type':'Application/json'
         },body:JSON.stringify(deletecommentdata)
@@ -227,7 +252,7 @@ useEffect(() => {
         
 
         try{
-           fetch('https://full-stack-incomplete.onrender.com/givelike',
+           fetch('http://localhost:7600/givelike',
             {
               method:"Post",headers:{
                 'Content-type':'Application/json'
@@ -243,14 +268,6 @@ useEffect(() => {
           console.log(error)
         }
   }
-
-  
-
-
-    
-  
-  
- 
 
   return (
     <div className="container" style={modeStyle}>
@@ -300,6 +317,24 @@ useEffect(() => {
           </div>
         )}
       </div>
+      <div className='relateditemcategory'>
+  
+        {
+                categoryitem1.map((item, index) => (
+                  <div key={item.id} className='item' style={modeStyle}>
+                      <img
+                          src={item.url}
+                          onClick={() => navigate(`/items/${item.id}`)}
+                          alt={item.name}
+                      />
+                      <h1 onClick={() => navigate(`/items/${item.id}`)}>{item.name}</h1>
+                      <p><strong>Price:</strong> ₹{item.price}</p>
+                      <p>{item.description}</p>
+                      
+                  </div>
+              ))
+        }
+      </div>
 
       
       <div className="comments-section">
@@ -344,7 +379,6 @@ useEffect(() => {
 </div>
 
 
-        {/* Comment Form */}
         <form
           className="comment-form"
           onSubmit={(e) => {
