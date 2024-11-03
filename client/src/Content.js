@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Content.css';
 import Hero1 from './Hero1.js';
 import { useNavigate } from 'react-router-dom';
-
+import Footer from './Footer.js';
 export default function Content(props) {
     const [selectedCategory, setSelectedCategory] = useState(""); 
     const [alldata,setAlldata] = useState([])
@@ -60,7 +60,7 @@ export default function Content(props) {
     }
 
     return (
-        <div className='main' style={modeStyle}>
+        <div className='main'>
             <Hero1 />
             <div className='Categories'>
                 <h1>Categories</h1>
@@ -108,6 +108,7 @@ export default function Content(props) {
                     ))
                 }
             </div>
+                        <Footer/>
         </div>
     );
 }
