@@ -16,8 +16,16 @@
     align-items: center;
     margin: auto;
     height: 100%;
-    width: 30%;
-    
-    
+    width: 30%; 
+  }
+
+  @media (max-width:480px) {
+    .footer{
+      height: 40px;
+    }
+
+    .insideFooter p{
+      font-size: 10px;
+    }
   }
   
