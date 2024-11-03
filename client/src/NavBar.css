@@ -19,8 +19,10 @@
 }
 
 .logo img{
+  
   height: 65px;
   width: auto;
+  
 }
 
 #cartcount{
@@ -162,8 +164,8 @@ input:focus {
     justify-content: center;
     align-items: center;
     width: 120px;
-    top: 25px;
-    right: 110px;
+    top: 20px;
+    right: 130px;
    
   }
 
@@ -199,6 +201,16 @@ input:focus {
     height: auto;
     padding: 20px;
 
+  }
+
+
+  .logo img{
+    position: absolute;
+  top: 5px;
+  left: 5px;
+
+    height: 50px;
+    width: auto;
   }
 
   
