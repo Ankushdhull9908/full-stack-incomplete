@@ -10,6 +10,11 @@
     margin: 0 auto;
 }
 
+#penguin{
+    height: 70px;
+    width: auto;
+}
+
 .item2 {
     cursor: pointer;
     display: flex;
