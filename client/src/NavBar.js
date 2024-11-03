@@ -44,9 +44,9 @@ export default function NavBar(props) {
 
   return (
     
-      <div className="navigation" style={mystyle}>
+      <div className="navigation">
         <div className='logo'>
-         <Link to="/"> <p>{props.title}</p></Link>
+         <Link to="/"><img src='/logo.png' alt='logo'/></Link>
         </div>
 
         {/* Hamburger menu for mobile screens */}
