@@ -8,6 +8,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
+  Navigate
 } from "react-router-dom";
 import About from './About.js';
 
@@ -91,6 +92,7 @@ function App() {
           <Route path="/items/:id" element={<DescriptionOfItems cart={cart} setCart={setCart} mode={modestyle} allItems={allItems} setAllItems={setAllItems}/>} />
           <Route path='/form' element = {<Form setsignupbtn={setsignupbtn}/>} />
           <Route path='/dashboard/:id' element={<UserDashboard  setsignupbtn={setsignupbtn}/>}/>
+          <Route path='*' element={<Navigate to="/"/>}/>
           
         </Routes>
        
