@@ -92,7 +92,7 @@ function App() {
           <Route path="/items/:id" element={<DescriptionOfItems cart={cart} setCart={setCart} mode={modestyle} allItems={allItems} setAllItems={setAllItems}/>} />
           <Route path='/form' element = {<Form setsignupbtn={setsignupbtn}/>} />
           <Route path='/dashboard/:id' element={<UserDashboard  setsignupbtn={setsignupbtn}/>}/>
-          <Route path='*' element={<Navigate to="/"/>}/>
+          <Route path='*' element={<Navigate to="/about"/>}/>
           
         </Routes>
        
